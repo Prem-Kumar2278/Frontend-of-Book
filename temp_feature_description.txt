@@ -1,0 +1,66 @@
+Project: Physical AI & Humanoid Robotics — AI Systems in the Physical World
+
+Target Audience:
+
+Intermediate AI and Python learners with minimal robotics background, preparing for advanced embodied AI and humanoid robotics work.
+
+Focus:
+
+Bridging digital AI intelligence with physical robotic bodies through simulation, perception, planning, and control. Emphasis on embodied intelligence, system architecture, and real-world constraints.
+
+Primary Goal:
+
+Enable learners to conceptually understand and design AI-driven humanoid robot systems that perceive, reason, plan, and act in simulated and real environments.
+
+Success Criteria:
+
+- module contains exactly 3 cohesive chapters
+
+- Readers can explain how AI connects to physical robot behavior
+
+- Clear understanding of simulation-to-reality (sim2real) workflows
+
+- Conceptual mastery of ROS 2, simulation, perception, and planning
+
+- Learners can mentally trace data flow from sensors → AI → actions
+
+Book Structure:
+
+- Module 1
+
+- module 1 contains 3 chapters
+
+- Each chapter includes:
+
+  - Learning objectives
+
+  - Conceptual explanations
+
+  - System architecture descriptions
+
+  - Real-world relevance
+
+  - Summary and key takeaways
+
+Module & Chapters:
+
+Module 1: The Robotic Nervous System (ROS 2)
+
+Focus: Middleware and communication layer for humanoid robots
+
+Chapters:
+
+1. Foundations of ROS 2 and Robotic Middleware
+  - Why robots need middleware
+  - Nodes, topics, services, and actions
+  - ROS 2 as the robot's nervous system
+
+2. Communication Between AI Agents and Robot Controllers
+  - Bridging AI decision-making with motor control
+  - Conceptual role of Python agents in ROS ecosystems
+  - Real-time vs non-real-time communication
+
+3. Modeling the Humanoid Body with URDF
+  - Representing joints, links, and sensors
+  - Structural modeling of humanoid robots
+  - How physical structure impacts intelligence

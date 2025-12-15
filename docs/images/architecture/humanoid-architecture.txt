@@ -1,0 +1,100 @@
+# Humanoid Robot Architecture - Sketch
+
+## Physical Architecture
+
+                    HEAD (Camera, IMU)
+                       │
+              ┌────────┼────────┐
+              │        │        │
+         NECK_JOINT  L_SHOULDER R_SHOULDER
+              │        │        │
+              │    L_UPPER_ARM R_UPPER_ARM
+              │        │        │
+              │    L_ELBOW_JOINT R_ELBOW_JOINT
+              │        │        │
+              │    L_FOREARM  R_FOREARM
+              │        │        │
+              │    L_WRIST_JOINT R_WRIST_JOINT
+              │        │        │
+              │      L_HAND   R_HAND
+              │
+           TORSO (Main Processing Unit)
+              │
+         HIP_JOINT (Center of Mass)
+              │
+        ┌─────┴─────┐
+        │           │
+   L_HIP_JOINT   R_HIP_JOINT
+        │           │
+   L_THIGH      R_THIGH
+        │           │
+   L_KNEE_JOINT R_KNEE_JOINT
+        │           │
+   L_CALF       R_CALF
+        │           │
+   L_ANKLE_JOINT R_ANKLE_JOINT
+        │           │
+      L_FOOT     R_FOOT
+
+## System Architecture Integration
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                        HUMANOID ROBOT                              │
+├─────────────────────────────────────────────────────────────────────┤
+│  HEAD SECTION:                                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐│
+│  │ • Camera sensors for vision                                     ││
+│  │ • Microphones for audio                                         ││
+│  │ • Speakers for audio output                                     ││
+│  │ • Processing unit for face recognition                          ││
+│  └─────────────────────────────────────────────────────────────────┘│
+│                                                                     │
+│  TORSO SECTION:                                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐│
+│  │ • Main computer for AI processing                               ││
+│  │ • Power management unit                                         ││
+│  │ • Wireless communication modules                                ││
+│  │ • Emergency stop systems                                        ││
+│  └─────────────────────────────────────────────────────────────────┘│
+│                                                                     │
+│  ARM SECTIONS:                                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐│
+│  │ • Multiple joints for dexterous manipulation                    ││
+│  │ • Tactile sensors in hands for object handling                  ││
+│  │ • Force/torque sensors for safe interaction                     ││
+│  │ • Cables and wiring routing through limbs                       ││
+│  └─────────────────────────────────────────────────────────────────┘│
+│                                                                     │
+│  LEG SECTIONS:                                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐│
+│  │ • High-torque actuators for locomotion                          ││
+│  │ • Force/torque sensors for balance and gait control             ││
+│  │ • Position encoders for precise movement control                ││
+│  │ • Compliance mechanisms for safe human interaction              ││
+│  └─────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────┘
+
+## AI-Physical Integration Points
+
+┌─────────────────────────────────────────────────────────────────────┐
+│              AI ↔ PHYSICAL INTEGRATION                              │
+├─────────────────────────────────────────────────────────────────────┤
+│  PERCEPTION LAYER:                                                  │
+│  • Vision → Object Recognition & Scene Understanding               │
+│  • Audio → Speech Recognition & Sound Localization                 │
+│  • Tactile → Object Properties & Interaction Quality               │
+│  • IMU → Orientation, Balance & Motion Detection                   │
+│  • Force/Torque → Physical Interaction Monitoring                  │
+│                                                                     │
+│  COGNITION LAYER:                                                   │
+│  • World Modeling → Environment Representation                     │
+│  • Task Planning → Action Sequencing                               │
+│  • Learning → Behavior Adaptation                                  │
+│  • Social Cognition → Human Interaction Understanding              │
+│                                                                     │
+│  ACTION LAYER:                                                      │
+│  • Locomotion Control → Walking, Balancing, Posture                │
+│  • Manipulation Control → Grasping, Reaching, Fine Motor Skills    │
+│  • Expressive Behavior → Gestures, Facial Expressions, Postures    │
+│  • Safety Systems → Collision Avoidance, Emergency Response        │
+└─────────────────────────────────────────────────────────────────────┘

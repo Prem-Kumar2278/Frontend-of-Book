@@ -1,0 +1,216 @@
+# Depth Camera Sensor Data Flow Diagram
+
+## Depth Camera Simulation Architecture
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    DEPTH CAMERA SIMULATION SYSTEM                      │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐      │
+│  │   VIRTUAL       │    │   RENDERING     │    │   DEPTH         │      │
+│  │   ENVIRONMENT   │───▶│   PIPELINE        │───▶│   PROCESSING      │      │
+│  │                 │    │                 │    │                 │      │
+│  │ • 3D Geometry   │    │ • Shaders       │    │ • Depth map     │      │
+│  │ • Materials     │    │ • Textures      │    │   generation    │      │
+│  │ • Lighting      │    │ • Camera        │    │ • Noise         │      │
+│  │ • Dynamics      │    │   parameters    │    │   modeling      │      │
+│  └─────────────────┘    └─────────────────┘    └─────────────────┘      │
+│         │                       │                       │                │
+│         ▼                       ▼                       ▼                │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                   DEPTH SIMULATION PIPELINE                         ││
+│  │  Scene → Render → Depth Buffer → Post-process → Depth Image        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Depth Camera Data Generation Process
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   DEPTH CAMERA DATA GENERATION                          │
+├─────────────────────────────────────────────────────────────────────────┤
+│  STEP 1: SCENE ANALYSIS                                                  │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Analyze 3D scene geometry and camera pose                       ││
+│  │  • Determine visible objects and surfaces                           ││
+│  │  • Calculate geometric relationships                                ││
+│  │  • Establish depth buffer resolution and parameters                 ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 2: GEOMETRIC PROJECTION                                            │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Transform 3D world coordinates to camera space                   ││
+│  │  • Project 3D points onto 2D image plane                           ││
+│  │  • Calculate depth values for each pixel                           ││
+│  │  • Handle occlusion and visibility determination                    ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 3: PHYSICAL SIMULATION                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Apply lens distortion models                                     ││
+│  │  • Simulate optical aberrations and limitations                     ││
+│  │  • Model depth accuracy variations with distance                     ││
+│  │  • Account for sensor-specific characteristics                      ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 4: NOISE AND ARTIFACT ADDITION                                     │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Add realistic noise patterns (Gaussian, speckle, etc.)           ││
+│  │  • Simulate quantization effects                                    ││
+│  │  • Model temporal consistency and drift                             ││
+│  │  • Apply material-dependent depth errors                            ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 5: IMAGE FORMATTING                                                │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Package depth data in standard formats                           ││
+│  │  • Add metadata (camera parameters, timestamps)                     ││
+│  │  • Format for downstream perception algorithms                      ││
+│  │  • Prepare alongside RGB data if applicable                         ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Depth Camera Sensor Characteristics
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    DEPTH CAMERA SPECIFICATIONS                          │
+├─────────────────────────────────────────────────────────────────────────┤
+│  RESOLUTION PARAMETERS:                                                  │
+│  • Depth Resolution: 160×120 to 2048×1536 pixels                      │
+│  • Color Resolution: 320×240 to 1920×1080 pixels (if RGB-D)           │
+│  • Pixel Size: 2μm to 10μm depending on sensor technology              │
+│  • Aspect Ratio: 4:3 or 16:9 standard ratios                          │
+│                                                                         │
+│  RANGE PARAMETERS:                                                       │
+│  • Working Distance: 0.2m to 5m for close-range, up to 10m+ for long-range│
+│  • Depth Range: Near range (0.2-2m) and far range (2-10m)             │
+│  • Depth Accuracy: ±1mm to ±10mm depending on distance and technology  │
+│  • Depth Resolution: 1mm to 1cm depending on distance and sensor      │
+│                                                                         │
+│  FREQUENCY PARAMETERS:                                                   │
+│  • Frame Rate: 15Hz to 60Hz for depth data                            │
+│  • Color Frame Rate: 30Hz to 60Hz (if RGB-D)                          │
+│  • Exposure Time: 1ms to 100ms depending on lighting conditions       │
+│  • Global vs Rolling Shutter: Affects motion capture quality          │
+│                                                                         │
+│  TECHNICAL SPECIFICATIONS:                                               │
+│  • Field of View: 60° to 100° diagonal (varies with technology)       │
+│  • Baseline (stereo): 6cm to 12cm for stereo depth cameras            │
+│  • Wavelength: 850nm to 940nm for active illumination depth cameras   │
+│  • Power Consumption: 1W to 10W depending on technology and usage     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Depth Camera Technologies and Simulation
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   DEPTH CAMERA TECHNOLOGIES                             │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  TIME-OF-FLIGHT (TOF) CAMERAS                                          │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Principle: Measures time for light pulse to travel to object    ││
+│  │  • Advantages: Fast, good for medium range, robust outdoors        ││
+│  │  • Challenges: Susceptible to ambient light, limited resolution    ││
+│  │  • Simulation: Time-of-flight calculations, ambient light modeling ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STRUCTURED LIGHT CAMERAS                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Principle: Projects known pattern, analyzes deformation         ││
+│  │  • Advantages: High accuracy at close range, good indoors          ││
+│  │  • Challenges: Sensitive to ambient light, slow capture            ││
+│  │  • Simulation: Pattern projection, deformation analysis            ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEREO VISION CAMERAS                                                  │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Principle: Two cameras, triangulate depth from parallax         ││
+│  │  • Advantages: Passive sensing, works in bright conditions         ││
+│  │  • Challenges: Computationally intensive, texture-dependent        ││
+│  │  • Simulation: Dual camera rendering, stereo matching algorithms   ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  TRIGGERED DEPTH SIMULATION                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Ray-based: Shoot rays from camera, measure distance to surfaces ││
+│  │  • Z-buffer: Use graphics pipeline depth buffer                    ││
+│  │  • Ray marching: For complex volumetric effects                    ││
+│  │  • Multi-ray sampling: For soft edges and anti-aliasing            ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Noise and Artifact Modeling
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                DEPTH CAMERA NOISE AND ARTIFACTS                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  DEPTH-SPECIFIC NOISE SOURCES                                        ││
+│  │  • Quantization noise: Discrete depth value steps                   ││
+│  │  • Thermal noise: Temperature-dependent sensor variations           ││
+│  │  • Shot noise: Quantum effects in light detection                   ││
+│  │  • Fixed pattern noise: Pixel-to-pixel sensitivity variations       ││
+│  │  • Temporal noise: Frame-to-frame variations                        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  DISTANCE-DEPENDENT ERRORS                                           ││
+│  │  • Near-distance compression: Lower resolution for close objects    ││
+│  │  • Far-distance degradation: Increasing error with range           ││
+│  │  • Baseline limitations (stereo): Accuracy drops with distance     │
+│  │  • Wavelength effects: Different materials at different ranges      ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  MATERIAL-DEPENDENT EFFECTS                                          ││
+│  │  • Reflectivity: Very dark or bright surfaces affect depth accuracy ││
+│  │  • Transparency: Glass, water cause incorrect depth measurements    ││
+│  │  • Specularity: Mirrors and shiny surfaces confuse depth sensing    ││
+│  │  • Absorption: Certain materials reduce signal strength             ││
+│  │  • Subsurface scattering: Light penetration affects depth accuracy  ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  SIMULATION ARTIFACTS                                                ││
+│  │  • Resolution limitations: Insufficient detail for small objects    ││
+│  │  • Occlusion effects: Objects blocking depth measurements           ││
+│  │  • Multi-path interference: Indirect reflections causing errors     ││
+│  │  • Temporal inconsistency: Depth changes between frames             ││
+│  │  • Calibration errors: Incorrect internal parameters                ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Data Flow and Processing
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                  DEPTH CAMERA DATA PROCESSING                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│  RAW DATA → CALIBRATION → FILTERING → FUSION → APPLICATION             │
+│                                                                         │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐         │
+│  │   RAW DEPTH     │  │  CALIBRATED     │  │   PROCESSED     │         │
+│  │   IMAGE         │  │  DEPTH MAP      │  │   DATA          │         │
+│  │                 │  │                 │  │                 │         │
+│  │ • Raw depth     │  │ • Undistorted   │  │ • Point clouds  │         │
+│  │   values        │  │   depth map     │  │ • Normals       │         │
+│  │ • Noisy data    │  │ • Corrected     │  │ • Surfaces      │         │
+│  │ • Missing       │  │   scale/offset  │  │ • Obstacles     │         │
+│  │   regions       │  │ • Temporal      │  │ • Free space    │         │
+│  │ • Metadata      │  │   alignment     │  │ • Planes        │         │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘         │
+│         │                       │                       │               │
+│         ▼                       ▼                       ▼               │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                  PROCESSING PIPELINE                                ││
+│  │  Depth Map → Point Cloud → Surface Reconstruction → Perception     ││
+│  │  → SLAM → Navigation → Manipulation → Planning                      ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  DOWNSTREAM APPLICATIONS                                             ││
+│  │  • 3D Reconstruction: Building 3D models from depth data           ││
+│  │  • Object Recognition: Identifying objects using shape information ││
+│  │  • SLAM: Simultaneous localization and mapping using depth         ││
+│  │  • Navigation: Path planning using obstacle information            ││
+│  │  • Manipulation: Grasping and interaction using spatial data       ││
+│  │  • Augmented Reality: Overlaying virtual objects on real scene     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘

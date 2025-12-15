@@ -1,0 +1,126 @@
+# URDF Structure Overview - Diagram
+
+## URDF File Structure
+
+┌─────────────────────────────────────────────────────────┐
+│                    URDF MODEL                           │
+├─────────────────────────────────────────────────────────┤
+│  <robot name="humanoid_robot">                          │
+│    <!-- Links - Rigid Bodies -->                        │
+│    <link name="base_link">                              │
+│      <visual>...</visual>                               │
+│      <collision>...</collision>                         │
+│      <inertial>...</inertial>                           │
+│    </link>                                              │
+│                                                         │
+│    <link name="torso">...</link>                        │
+│    <link name="head">...</link>                         │
+│    <link name="left_arm_upper">...</link>               │
+│    <link name="left_arm_lower">...</link>               │
+│    <!-- More links... -->                               │
+│                                                         │
+│    <!-- Joints - Connections -->                        │
+│    <joint name="torso_joint" type="fixed">              │
+│      <parent link="base_link"/>                         │
+│      <child link="torso"/>                              │
+│    </joint>                                             │
+│                                                         │
+│    <joint name="neck_joint" type="revolute">            │
+│      <parent link="torso"/>                             │
+│      <child link="head"/>                               │
+│      <axis xyz="0 0 1"/>                                │
+│    </joint>                                             │
+│                                                         │
+│    <joint name="shoulder_joint" type="continuous">      │
+│      <parent link="torso"/>                             │
+│      <child link="left_arm_upper"/>                     │
+│    </joint>                                             │
+│                                                         │
+│    <!-- Sensors - Perception Elements -->               │
+│    <gazebo reference="head_camera">                     │
+│      <sensor type="camera" name="camera1">              │
+│        <pose>...</pose>                                 │
+│      </sensor>                                          │
+│    </gazebo>                                            │
+│  </robot>                                               │
+└─────────────────────────────────────────────────────────┘
+
+## Hierarchical Structure
+
+                      base_link (root)
+                           │
+                      torso_joint (fixed)
+                           │
+                        torso
+                         / \
+              left_arm_joint   right_arm_joint
+                   /               \
+            left_arm_upper    right_arm_upper
+                 |                   |
+            left_elbow_joint   right_elbow_joint
+                 |                   |
+            left_arm_lower    right_arm_lower
+                 |                   |
+           left_wrist_joint   right_wrist_joint
+                 |                   |
+              left_hand          right_hand
+
+## Component Breakdown
+
+### Links (Rigid Bodies)
+┌─────────────────┐
+│    LINK         │
+│                 │
+│ • Visual:       │
+│   - Shape       │
+│   - Color       │
+│   - Material    │
+│                 │
+│ • Collision:    │
+│   - Collision   │
+│     geometry    │
+│                 │
+│ • Inertial:     │
+│   - Mass        │
+│   - Center of   │
+│     Mass        │
+│   - Inertia     │
+└─────────────────┘
+
+### Joints (Connections)
+┌─────────────────┐
+│    JOINT        │
+│                 │
+│ • Type:         │
+│   - Revolute    │
+│   - Prismatic   │
+│   - Continuous  │
+│   - Fixed       │
+│                 │
+│ • Parent/Child: │
+│   - Connection  │
+│     relationship│
+│                 │
+│ • Limits:       │
+│   - Range of    │
+│     motion      │
+└─────────────────┘
+
+### Sensors (Perception)
+┌─────────────────┐
+│   SENSORS       │
+│                 │
+│ • Camera        │
+│ • IMU           │
+│ • Force/Torque  │
+│ • LIDAR         │
+│ • Tactile       │
+│                 │
+│ • Position:     │
+│   - Where on    │
+│     robot       │
+│                 │
+│ • Type:         │
+│   - What it     │
+│     measures    │
+└─────────────────┘

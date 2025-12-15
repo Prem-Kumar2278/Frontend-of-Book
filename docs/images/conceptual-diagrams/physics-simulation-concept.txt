@@ -1,0 +1,91 @@
+# Physics Simulation Concept Diagram
+
+## Core Components of Physics Simulation
+
+┌─────────────────────────────────────────────────────────────────┐
+│                    PHYSICS SIMULATION                           │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│  │   GRAVITY       │    │  COLLISION      │    │   CONSTRAINTS   │
+│  │   MODELING      │    │  DETECTION      │    │   & JOINTS      │
+│  │                 │    │                 │    │                 │
+│  │ • Gravitational │    │ • Object        │    │ • Fixed:        │
+│  │   acceleration  │    │   bounding      │    │   Rigid connection│
+│  │ • Direction &   │    │ • Contact       │    │ • Revolute:     │
+│  │   magnitude     │    │   detection     │    │   Hinge joint   │
+│  │ • Uniform       │    │ • Response      │    │ • Prismatic:    │
+│  │   application   │    │   calculation   │    │   Linear motion │
+│  └─────────────────┘    └─────────────────┘    └─────────────────┘
+│         │                       │                       │
+│         ▼                       ▼                       ▼
+│  ┌─────────────────────────────────────────────────────────────────┐
+│  │                    SIMULATION ENGINE                          │
+│  │           (ODE, Bullet, PhysX, etc.)                        │
+│  └─────────────────────────────────────────────────────────────────┘
+│         ▲                       ▲                       ▲
+│         │                       │                       │
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│  │   ROBOT         │    │  ENVIRONMENT    │    │  SENSORS &      │
+│  │   DYNAMICS      │    │  OBJECTS        │    │  ACTUATORS      │
+│  │                 │    │                 │    │                 │
+│  │ • Balance       │    │ • Static        │    │ • Force/Torque  │
+│  │ • Locomotion    │    │   obstacles     │    │ • Position      │
+│  │ • Manipulation  │    │ • Dynamic       │    │ • IMU data      │
+│  └─────────────────┘    │   objects       │    └─────────────────┘
+│                         │ • Surfaces      │
+│                         └─────────────────┘
+└─────────────────────────────────────────────────────────────────┘
+
+## Physics Simulation Process Flow
+
+┌─────────────────┐
+│   TIME STEP     │
+│   ADVANCE       │
+└─────────┬───────┘
+          │
+┌─────────▼───────┐    ┌─────────────────┐    ┌─────────────────┐
+│  APPLY FORCES   │───▶│  INTEGRATION    │───▶│ UPDATE POSITIONS│
+│ (gravity, user, │    │ (velocity,      │    │ & ORIENTATIONS  │
+│  actuators)     │    │  acceleration)   │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+          │                       │                       │
+          └───────────────────────┼───────────────────────┘
+                                  ▼
+                    ┌─────────────────────────┐
+                    │   COLLISION DETECTION   │
+                    │   & RESPONSE            │
+                    │   (resolve penetrations │
+                    │    and contact forces)  │
+                    └─────────────────────────┘
+                                  │
+                                  ▼
+                    ┌─────────────────────────┐
+                    │   CONSTRAINT SOLVING    │
+                    │   (maintain joint       │
+                    │    limits & connections)│
+                    └─────────────────────────┘
+
+## Simulation Fidelity vs. Complexity Trade-offs
+
+┌─────────────────────────────────────────────────────────────────┐
+│  ACCURACY vs PERFORMANCE                                        │
+│                                                                 │
+│  High Fidelity     │                                           │
+│  • Detailed mesh   │    ┌─────────────────────────────────────┐│
+│  • Small time step │    │           OPTIMAL ZONE              ││
+│  • Complex physics │    │    BALANCED SIMULATION              ││
+│  • Realistic       │───▶│    FOR DIGITAL TWINS               ││
+│  constraints       │    │                                     ││
+│                    │    └─────────────────────────────────────┘│
+│                    │                │                          │
+│  Low Fidelity     │                │                          │
+│  • Simplified      │                │                          │
+│  geometry         │                │                          │
+│  • Large time      │                │                          │
+│  steps            │                │                          │
+│  • Basic physics   │                │                          │
+│  • Simple          │                │                          │
+│  constraints      │                │                          │
+│                   └────────────────────────────────────────────────┘
+│                   Computational Complexity →
+└─────────────────────────────────────────────────────────────────┘

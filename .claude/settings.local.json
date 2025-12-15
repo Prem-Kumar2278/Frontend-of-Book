@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "SlashCommand(/sp.specify)",
+      "Bash(powershell -Command \".specify/scripts/powershell/setup-plan.ps1 -Json\")",
+      "Bash(powershell -Command \".specify/scripts/powershell/update-agent-context.ps1 -AgentType claude\")",
+      "Bash(powershell -Command \".specify/scripts/powershell/check-prerequisites.ps1 -Json\")",
+      "Bash(grep -i \"terminology\\|definition\\|define\" docs/modules/physical-ai-robotics/*.md)",
+      "Bash(powershell -Command \".specify/scripts/powershell/create-new-feature.ps1 -Json -Number 2 -ShortName ''digital-twin-simulation'' ''Project: Physical AI & Humanoid Robotics — AI in the Physical World\n\nAudience:\n\nIntermediate AI/Python learners with minimal robotics background.\n\nFocus:\n\nDigital twins for embodied AI: physics simulation, environments, and sensor realism.\n\nGoal:\n\nEnable learners to understand how simulated worlds train and validate AI-driven humanoid robots.\n\nSuccess Criteria:\n\n- Module 2 has exactly 3 chapters\n\n- Readers grasp sim2real concepts\n\n- Can trace sensors → perception → AI behavior\n\nStructure:\n\n- One module, three chapters\n\n- Each chapter: objectives, concepts, architecture, relevance, takeaways\n\nModule 2: The Digital Twin (Gazebo & Unity)\n\nFocus: Physics-based simulation and environment modeling\n\nChapters:\n\n1. Physics Simulation Foundations  \n  - Gravity, collisions, constraints  \n  - Simulation realism and limits\n\n2. Environment Design & Interaction  \n  - Virtual worlds for training  \n  - Human–robot interaction concepts\n\n3. Sensor Simulation & Perception  \n  - LiDAR, depth cameras, IMUs  \n  - Noise, latency, and realism\n\nConstraints:\n\n- Theory and architecture only\n\n- No code or framework syntax\n\nOut of Scope:\n\n- Low-level math\n\n- Vendor comparisons\n\n- Ethics or tutorials\n\nFormat:\n\n- Markdown, Docusaurus-ready\n\n- Spec-driven and reusable''\")",
+      "Bash(powershell -Command \".specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks\")",
+      "Bash(grep -i \"terminology\\|definition\\|define\" docs/modules/digital-twin-simulation/*.md)",
+      "Bash(git fetch --all --prune)",
+      "Bash(powershell -Command \".specify/scripts/powershell/create-new-feature.ps1 -Json -Number 3 -ShortName ''ai-robot-brain'' ''Project: Physical AI & Humanoid Robotics — AI in the Physical World\n\nAudience:\n\nIntermediate AI/Python learners with minimal robotics background.\n\nFocus:\n\nAI perception, learning, and navigation for humanoid robots.\n\nGoal:\n\nEnable learners to understand how AI enables robots to perceive space, localize themselves, and navigate the physical world.\n\nSuccess Criteria:\n\n- Module 3 has exactly 3 chapters\n\n- Readers grasp sim2real perception and navigation\n\n- Can trace perception → planning → motion\n\nStructure:\n\n- One module, three chapters\n\n- Each chapter: objectives, concepts, architecture, relevance, takeaways\n\nModule 3: The AI-Robot Brain (NVIDIA Isaac™)\n\nFocus: Advanced perception and navigation\n\nChapters:\n\n1. Photorealistic Simulation & Synthetic Data  \n  - Synthetic data for robotics  \n  - Closing the reality gap\n\n2. Localization & Mapping  \n  - Visual SLAM concepts  \n  - Spatial awareness and acceleration\n\n3. Navigation & Motion Planning  \n  - Path planning basics  \n  - Bipedal movement constraints\n\nConstraints:\n\n- Theory and architecture only\n\n- No code or framework syntax\n\nOut of Scope:\n\n- Low-level math\n\n- Vendor comparisons\n\n- Ethics or tutorials\n\nFormat:\n\n- Markdown, Docusaurus-ready\n\n- Spec-driven and reusable''\")",
+      "SlashCommand(/sp.plan)",
+      "Bash(git add .)"
+    ]
+  }
+}

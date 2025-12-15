@@ -31,7 +31,17 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+1. **AI-Native Authoring**: Verify that development follows Spec-Kit Plus methodology with Claude Code integration; Documentation will be technically accurate from official sources; Every feature will start with a clear specification before implementation.
+
+2. **Spec-Driven Development**: Confirm that all development will begin with comprehensive specifications; Features will be implemented according to agreed-upon specs; Changes to functionality will require spec updates before code changes.
+
+3. **Technical Accuracy and Grounding**: Ensure that RAG chatbot responses will be grounded only in book content or user-selected text; No hallucinated responses will be allowed; All technical claims will be verified against official documentation.
+
+4. **Reproducible Setup**: Verify that every environment will be fully reproducible from documentation; All dependencies and setup procedures will be clearly documented; Local development and production deployments will follow identical processes.
+
+5. **Modular Architecture**: Confirm that system components (book engine, RAG service, chatbot) will be modular and loosely coupled; Each component should be independently deployable and testable; Clear API contracts between services.
+
+6. **End-to-End Testing**: Verify that focus areas for integration tests include: RAG retrieval accuracy, chatbot response quality, book content indexing, search functionality, deployment pipeline integrity.
 
 ## Project Structure
 

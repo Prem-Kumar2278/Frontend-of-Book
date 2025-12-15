@@ -1,0 +1,152 @@
+# LiDAR Sensor Data Flow Diagram
+
+## LiDAR Simulation Architecture
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        LiDAR SIMULATION SYSTEM                          │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐      │
+│  │   VIRTUAL       │    │   SIMULATION    │    │   SENSOR        │      │
+│  │   ENVIRONMENT   │───▶│   ENGINE        │───▶│   MODEL         │      │
+│  │                 │    │                 │    │                 │      │
+│  │ • 3D Geometry   │    │ • Ray Casting   │    │ • Beam Modeling │      │
+│  │ • Materials     │    │ • Intersection  │    │ • Resolution    │      │
+│  │ • Lighting      │    │ • Timing        │    │ • Range Limits  │      │
+│  │ • Dynamics      │    │ • Physics       │    │ • Accuracy      │      │
+│  └─────────────────┘    └─────────────────┘    └─────────────────┘      │
+│         │                       │                       │                │
+│         ▼                       ▼                       ▼                │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                    SIMULATION PIPELINE                              ││
+│  │  Environment → Raycast → Intersection → Measurement → Point Cloud  ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## LiDAR Data Generation Process
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     LiDAR DATA GENERATION                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│  STEP 1: RAY INITIALIZATION                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Initialize laser rays with specified angles                      ││
+│  │  • Set emission timing and beam parameters                          ││
+│  │  • Configure field of view and resolution settings                  ││
+│  │  • Establish coordinate system and frame of reference               ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 2: RAY-WORLD INTERSECTION                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Cast rays through virtual environment                            ││
+│  │  • Calculate intersection with environment geometry                 ││
+│  │  • Account for material properties (reflectivity, transparency)     ││
+│  │  • Handle multiple reflections and occlusions                       ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 3: MEASUREMENT CALCULATION                                        │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Calculate distance from time-of-flight                           ││
+│  │  • Apply noise and uncertainty models                               ││
+│  │  • Adjust for environmental factors (weather, lighting)             ││
+│  │  • Incorporate sensor-specific characteristics                      ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 4: POINT CLOUD ASSEMBLY                                           │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Collect distance measurements into point cloud                   ││
+│  │  • Include intensity information (reflectivity)                     ││
+│  │  • Organize points by scan pattern (horizontal/vertical angles)     ││
+│  │  • Apply temporal stamping for dynamic scenes                       ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## LiDAR Sensor Characteristics
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      LiDAR SPECIFICATIONS                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│  RANGE PARAMETERS:                                                       │
+│  • Maximum Range: 10m - 300m depending on sensor model                  │
+│  • Minimum Range: 0.1m - 1m for most sensors                           │
+│  • Range Accuracy: ±1cm to ±5cm depending on distance                   │
+│  • Range Resolution: 0.1mm to 1cm                                      │
+│                                                                         │
+│  ANGULAR PARAMETERS:                                                     │
+│  • Horizontal FOV: 360° (mechanical) or 90°-120° (solid state)         │
+│  • Vertical FOV: 10°-45° for multi-line sensors                        │
+│  • Horizontal Resolution: 0.01° - 0.5°                                │
+│  • Vertical Resolution: 0.1° - 2.5°                                   │
+│                                                                         │
+│  TEMPORAL PARAMETERS:                                                    │
+│  • Scan Rate: 5Hz - 20Hz for mechanical, higher for solid state       │
+│  • Data Rate: 10K - 2M points per second                              │
+│  • Pulse Rate: 10K - 1M pulses per second                             │
+│                                                                         │
+│  PERFORMANCE CHARACTERISTICS:                                            │
+│  • Reflectivity Sensitivity: 10% to 90% depending on wavelength        │
+│  • Multi-return Capability: Single, dual, or triple return modes       │
+│  • Operating Conditions: Various temperature and weather specifications │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Noise and Artifacts Modeling
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    LiDAR NOISE MODELING                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  DISTANCE NOISE SOURCES                                             ││
+│  │  • Thermal noise: Random variations in measurement electronics     ││
+│  │  • Quantization noise: Discrete sampling of continuous measurements││
+│  │  • Shot noise: Statistical fluctuations in photon detection        ││
+│  │  • Systematic bias: Consistent offset in measurements              ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  SIGNAL QUALITY FACTORS                                             ││
+│  │  • Signal-to-noise ratio: Affects distance measurement accuracy     ││
+│  │  • Multipath interference: False echoes from multiple reflections  ││
+│  │  • Sunlight interference: Background illumination effects          ││
+│  │  • Atmospheric attenuation: Weather and dust effects               ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  MATERIAL DEPENDENT EFFECTS                                         ││
+│  │  • Reflectivity: Dark or transparent objects reduce return signal   ││
+│  │  • Angle of incidence: Oblique surfaces affect measurement accuracy ││
+│  │  • Surface roughness: Affects scattering and return characteristics ││
+│  │  • Absorption: Certain materials absorb laser energy significantly ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  SIMULATION ARTIFACTS                                               ││
+│  │  • Occlusion shadows: Objects blocking laser beams create gaps      ││
+│  │  • Resolution limitations: Insufficient sampling of small objects   ││
+│  │  • Temporal aliasing: Moving objects appear distorted in scans      ││
+│  │  • Geometric distortions: Imperfect mounting or calibration errors  ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Data Flow and Processing
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    LiDAR DATA PROCESSING                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│  RAW DATA → PREPROCESSING → FEATURE EXTRACTION → APPLICATION            │
+│                                                                         │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐         │
+│  │   RAW POINT     │  │  PREPROCESSED   │  │   PROCESSED     │         │
+│  │   CLOUD         │  │  POINT CLOUD    │  │   DATA          │         │
+│  │                 │  │                 │  │                 │         │
+│  │ • X,Y,Z coords  │  │ • Outlier       │  │ • Obstacles     │         │
+│  │ • Intensity     │  │   removal       │  │ • Free space    │         │
+│  │ • Timestamp     │  │ • Noise         │  │ • Ground plane  │         │
+│  │ • Ray angles    │  │   filtering     │  │ • Clusters      │         │
+│  │ • Sensor frame  │  │ • Registration  │  │ • Segments      │         │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘         │
+│         │                       │                       │               │
+│         ▼                       ▼                       ▼               │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                    PROCESSING PIPELINE                              ││
+│  │  Filtering → Segmentation → Classification → Tracking → Planning   ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘

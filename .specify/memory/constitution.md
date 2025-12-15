@@ -1,55 +1,41 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# AI/Spec-Driven Book with Embedded RAG Chatbot Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. AI-Native Authoring
+All content creation and development follows Spec-Kit Plus methodology with Claude Code integration; Documentation must be technically accurate from official sources; Every feature starts with a clear specification before implementation.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Spec-Driven Development
+All development begins with comprehensive specifications; Features are implemented according to agreed-upon specs; Changes to functionality require spec updates before code changes.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Technical Accuracy and Grounding (NON-NEGOTIABLE)
+All RAG chatbot responses must be grounded only in book content or user-selected text; No hallucinated responses allowed; All technical claims must be verified against official documentation.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Reproducible Setup
+Every environment must be fully reproducible from documentation; All dependencies and setup procedures must be clearly documented; Local development and production deployments follow identical processes.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Modular Architecture
+System components (book engine, RAG service, chatbot) must be modular and loosely coupled; Each component should be independently deployable and testable; Clear API contracts between services.
 
-### [PRINCIPLE_6_NAME]
+### VI. End-to-End Testing
+Focus areas requiring integration tests: RAG retrieval accuracy, chatbot response quality, book content indexing, search functionality, deployment pipeline integrity.
 
+## Technology Stack Requirements
+- Book platform: Docusaurus framework deployed on GitHub Pages
+- RAG stack: OpenAI Agents/Chatkit, FastAPI backend, Neon Postgres, Qdrant Cloud vector storage
+- Code must be runnable, well-documented, and follow security best practices
+- All external dependencies must have acceptable licenses for the project
 
-[PRINCIPLE__DESCRIPTION]
-
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
-
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+- All features must begin with a spec document before implementation
+- Code reviews must verify compliance with architectural principles
+- All changes must pass automated tests before merging
+- Documentation updates must accompany all functional changes
+- Branch naming follows pattern: feature/[feature-name], bugfix/[issue], hotfix/[issue]
+- Pull requests require at least one approval before merging
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution governs all aspects of the AI/Spec-Driven Book with Embedded RAG Chatbot project. All development activities, architectural decisions, and implementation choices must comply with these principles. Amendments to this constitution require explicit approval from project stakeholders and must include a migration plan for existing code. All pull requests and code reviews must verify constitutional compliance.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-12-15 | **Last Amended**: 2025-12-15

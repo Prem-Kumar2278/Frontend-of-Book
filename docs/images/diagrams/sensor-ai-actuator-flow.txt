@@ -1,0 +1,67 @@
+# Sensor → AI → ROS 2 → Actuator Flow - Data Flow Visualization
+
+## Complete Flow Architecture
+
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   SENSORS       │    │   ROS 2         │    │   AI PROCESSING │    │   ACTUATORS     │
+│                 │    │   MIDDLEWARE    │    │   NODES         │    │                 │
+│ • Camera        │───►│ • Topics        │───►│ • Perception    │───►│ • Motors        │
+│ • LiDAR         │    │ • Services      │    │ • Decision      │    │ • Grippers      │
+│ • IMU           │    │ • Actions       │    │ • Planning      │    │ • Lights        │
+│ • GPS           │    │ • Nodes         │    │ • Control       │    │ • Displays      │
+│ • Encoders      │◄───│                 │◄───│ • Agents        │◄───│                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘    └─────────────────┘
+        ▲                       ▲                       ▲                       ▲
+        │                       │                       │                       │
+        └───────────────────────┴───────────────────────┴───────────────────────┘
+
+## Detailed Flow Process
+
+### Phase 1: Sensing
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ Sensors collect environmental and self-state data                               │
+│ [Camera Image] [LiDAR Scan] [IMU Data] [GPS Position] [Encoder Counts]          │
+└─────────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+### Phase 2: ROS 2 Distribution
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ ROS 2 Middleware distributes sensor data to appropriate nodes                   │
+│ /camera/image_raw → Perception Nodes                                            │
+│ /lidar/scan → Obstacle Detection Nodes                                          │
+│ /imu/data → State Estimation Nodes                                              │
+│ /gps/fix → Localization Nodes                                                   │
+│ /joint_states → State Monitoring Nodes                                          │
+└─────────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+### Phase 3: AI Processing
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ AI Nodes process information and make decisions                                 │
+│ Perception: Object detection, scene understanding                               │
+│ Decision: Task planning, behavioral selection                                   │
+│ Planning: Path planning, motion planning                                        │
+│ Control: Low-level command generation                                           │
+└─────────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+### Phase 4: Command Distribution
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ ROS 2 distributes commands back to actuators                                    │
+│ /cmd_vel → Base Controller (for movement)                                       │
+│ /arm_controller/command → Arm Controller (for manipulation)                     │
+│ /gripper/command → Gripper Controller (for grasping)                            │
+└─────────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+### Phase 5: Physical Action
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ Actuators execute physical actions                                              │
+│ Motors move robot, grippers grasp objects, lights indicate status, etc.         │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+## Feedback Loop
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ Results from actions are sensed again, creating continuous feedback loop        │
+│ Actions → New Sensor Data → Updated AI Decisions → New Actions                  │
+└─────────────────────────────────────────────────────────────────────────────────┘

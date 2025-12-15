@@ -84,11 +84,11 @@
 
 ### Functional Requirements
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+- **FR-001**: System MUST provide a Docusaurus-based book platform deployed on GitHub Pages
+- **FR-002**: System MUST provide an embedded RAG chatbot that responds only to book content or user-selected text  
+- **FR-003**: Users MUST be able to interact with the RAG chatbot to ask questions about book content
+- **FR-004**: System MUST use FastAPI backend with Neon Postgres and Qdrant Cloud for RAG functionality
+- **FR-005**: System MUST ensure all responses are technically accurate and grounded in official documentation
 
 *Example of marking unclear requirements:*
 
@@ -109,7 +109,7 @@
 
 ### Measurable Outcomes
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-001**: Book platform successfully deploys to GitHub Pages with all content accessible
+- **SC-002**: RAG chatbot provides accurate responses grounded in book content with <5% hallucination rate
+- **SC-003**: Users can successfully ask questions about book content and receive relevant answers within 3 seconds
+- **SC-004**: All system components follow modular architecture with independent deployability

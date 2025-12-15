@@ -1,0 +1,198 @@
+# Human-Robot Interaction Concept Diagram
+
+## Human-Robot Interaction System Model
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    HUMAN-ROBOT INTERACTION SYSTEM                       │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                        HUMAN MODEL                                  ││
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     ││
+│  │  │   PERCEPTION    │  │   COGNITION     │  │   BEHAVIOR      │     ││
+│  │  │                 │  │                 │  │                 │     ││
+│  │  │ • Visual input  │  │ • Intent        │  │ • Social        │     ││
+│  │  │ • Auditory      │  │ • Attention     │  │   protocols     │     ││
+│  │  │ • Tactile       │  │ • Memory        │  │ • Gestures      │     ││
+│  │  │ • Proprioceptive│  │ • Reasoning     │  │ • Speech        │     ││
+│  │  │ • Context       │  │ • Emotion       │  │ • Movements     │     ││
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                    │                           │                        │
+│                    ▼                           ▼                        │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                    INTERACTION SPACE                                ││
+│  │  ┌─────────────────────────────────────────────────────────────────┐││
+│  │  │  COMMUNICATION CHANNELS                                         │││
+│  │  │  • Visual: Eye contact, gestures, facial expressions           │││
+│  │  │  • Auditory: Speech, sound cues, tone of voice                 │││
+│  │  │  • Tactile: Physical contact, haptics                          │││
+│  │  │  • Proxemic: Personal space, distance preferences              │││
+│  │  └─────────────────────────────────────────────────────────────────┘││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                    │                           │                        │
+│                    ▼                           ▼                        │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                      ROBOT MODEL                                    ││
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     ││
+│  │  │   PERCEPTION    │  │   COGNITION     │  │   BEHAVIOR      │     ││
+│  │  │                 │  │                 │  │                 │     ││
+│  │  │ • Camera vision │  │ • Intent        │  │ • Navigation    │     ││
+│  │  │ • Microphone    │  │ • Attention     │  │ • Manipulation  │     ││
+│  │  │ • Touch sensors │  │ • Memory        │  │ • Communication │     ││
+│  │  │ • Proximity     │  │ • Reasoning     │  │ • Expressive    │     ││
+│  │  │ • Context       │  │ • Emotion       │  │   behaviors     │     ││
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Interaction Types and Modalities
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     INTERACTION TYPES                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  COOPERATIVE INTERACTION                                                │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  Human and robot work together toward shared goals                  ││
+│  │  • Task sharing: Divide responsibilities                           ││
+│  │  • Complementary roles: Each leverages strengths                   ││
+│  │  • Mutual adaptation: Both adjust to each other                    ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ASSISTIVE INTERACTION                                                  │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  Robot assists human in completing tasks                            ││
+│  │  • Direct help: Physical assistance                                ││
+│  │  • Information provision: Guidance, advice                         ││
+│  │  • Safety monitoring: Protection, alerting                         ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  SOCIAL INTERACTION                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  Focus on social protocols and relationship building                ││
+│  │  • Greeting rituals: Acknowledgment, attention-getting             ││
+│  │  • Conversation: Natural dialogue patterns                         ││
+│  • Emotional exchange: Empathy, companionship                        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  INSTRUCTIONAL INTERACTION                                              │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  Human teaches robot new skills or behaviors                        ││
+│  │  • Demonstration: Show by example                                  ││
+│  │  • Correction: Guiding robot behavior                              ││
+│  │  • Reinforcement: Reward-based learning                            ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Communication Channels and Protocols
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                COMMUNICATION CHANNELS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  VERBAL COMMUNICATION                                               ││
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     ││
+│  │  │   SPEECH INPUT  │  │  SPEECH OUTPUT  │  │   DIALOGUE      │     ││
+│  │  │                 │  │                 │  │   MANAGEMENT    │     ││
+│  │  │ • Automatic     │  │ • Natural       │  │ • Turn taking   │     ││
+│  │  │   speech recog. │  │   language gen. │  │ • Interruption  │     ││
+│  │  │ • Intent        │  │ • Emotional     │  │ • Clarification │     ││
+│  │  │   classification│  │   prosody       │  │ • Context       │     ││
+│  │  │ • Noise         │  │ • Multi-lingual │  │   awareness     │     ││
+│  │  │   filtering     │  │   support       │  │ • Politeness    │     ││
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  NON-VERBAL COMMUNICATION                                           ││
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     ││
+│  │  │   GESTURES      │  │   FACIAL        │  │   PROXEMICS     │     ││
+│  │  │                 │  │   EXPRESSIONS   │  │                 │     ││
+│  │  │ • Deictic       │  │ • Emotion       │  │ • Personal      │     ││
+│  │  │   pointing      │  │   recognition   │  │   space (0-45cm)│     ││
+│  │  │ • Iconic        │  │ • Affect        │  │ • Social space  │     ││
+│  │  │   mimicking     │  │   modeling      │  │   (45cm-1.2m)   │     ││
+│  │  │ • Regulator     │  │ • Personality   │  │ • Public space  │     ││
+│  │  │   controlling   │  │   expression    │  │   (1.2m+)       │     ││
+│  │  │ • Emotional     │  │ • Attention     │  │ • Cultural      │     ││
+│  │  │   expression    │  │   engagement    │  │   variations    │     ││
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Simulation Modeling Approaches
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│               SIMULATION MODELING APPROACHES                            │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  RULE-BASED MODELING                                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Deterministic behavior patterns                                   ││
+│  │  • Explicit social protocols                                         ││
+│  │  • Predictable interaction sequences                                ││
+│  │  • Easy to implement and debug                                     ││
+│  │  • Limited adaptability                                            ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  BEHAVIOR TREE MODELING                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Hierarchical task decomposition                                  ││
+│  │  • Conditional behavior selection                                   ││
+│  │  • Composable interaction modules                                  ││
+│  │  • Better for complex scenarios                                     ││
+│  │  • Moderate complexity to implement                                ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  MACHINE LEARNING MODELING                                              │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Learned from human-human interaction data                        ││
+│  │  • Adaptive and personalized responses                             ││
+│  │  • Can handle novel situations                                     ││
+│  │  • Computationally intensive                                        ││
+│  │  • Requires large training datasets                                 ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  HYBRID APPROACHES                                                      │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Rule-based for safety-critical behaviors                         ││
+│  │  • ML-based for adaptive, social behaviors                         ││
+│  │  • Behavior trees for task coordination                            ││
+│  │  • Best balance of safety, adaptability, and efficiency            ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Performance Metrics and Evaluation
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│              EVALUATION METRICS                                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  EFFECTIVENESS METRICS                                              ││
+│  │  • Task completion rate                                              ││
+│  │  • Time to goal achievement                                         ││
+│  │  • Error frequency and recovery                                     ││
+│  │  • Information transfer accuracy                                    ││
+│  │  • Goal achievement success                                         ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  EFFICIENCY METRICS                                                 ││
+│  │  • Communication bandwidth utilization                              ││
+│  │  • Computational resource usage                                     ││
+│  │  • Response time to human requests                                  ││
+│  │  • Energy consumption during interaction                            ││
+│  │  • Resource allocation optimization                                 ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  ACCEPTABILITY/SATISFACTION METRICS                                 ││
+│  │  • User satisfaction scores                                          ││
+│  │  • Naturalness of interaction rating                               ││
+│  │  • Comfort level assessments                                        ││
+│  │  • Willingness to interact again                                    ││
+│  │  • Trust and reliability perceptions                                ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
