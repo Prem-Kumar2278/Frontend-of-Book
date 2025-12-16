@@ -1,0 +1,55 @@
+# Intent Recognition Flow in Robotic Systems
+
+## Overview
+This diagram shows the process flow for recognizing user intent from natural language commands in robotic systems, highlighting the steps from raw speech to actionable intent.
+
+## Process Stages
+
+### Stage 1: Speech Input and Recognition
+- Raw audio capture
+- Speech-to-text conversion
+- Text normalization
+- Output: Recognized text with confidence scores
+
+### Stage 2: Natural Language Understanding
+- Named entity recognition
+- Part-of-speech tagging
+- Syntactic parsing
+- Semantic analysis
+- Output: Structured representation of the utterance
+
+### Stage 3: Intent Classification
+- Intent type identification (e.g., navigation, manipulation, information)
+- Entity linking to world model
+- Command structure analysis
+- Output: Classified intent with parameters
+
+### Stage 4: Context Integration
+- Conversational context incorporation
+- Environmental context integration
+- User preference consideration
+- Ambiguity resolution
+- Output: Disambiguated intent with full context
+
+### Stage 5: Action Mapping
+- Intent to executable action translation
+- Constraint checking against robot capabilities
+- Feasibility validation
+- Output: Executable command sequence
+
+## Feedback Loops
+- Disambiguation requests to user
+- Context updates from perception
+- Execution feedback to intent refinement
+
+## Error Handling
+- Confidence threshold checking
+- Fallback to clarification requests
+- Graceful degradation for uncertain inputs
+- Recovery from misrecognition
+
+## Key Considerations
+- Real-time processing requirements
+- Ambiguity tolerance and resolution
+- Multi-turn dialogue support
+- Robustness to speech recognition errors

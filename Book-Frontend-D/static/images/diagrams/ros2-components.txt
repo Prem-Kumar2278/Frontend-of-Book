@@ -1,0 +1,51 @@
+# ROS 2 Components - Conceptual Diagram
+
+## Core Architecture
+
+┌─────────────────────────────────────────────────────────┐
+│                    ROS 2 Ecosystem                      │
+├─────────────────────────────────────────────────────────┤
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐  │
+│  │   Node A    │    │   Node B    │    │   Node C    │  │
+│  │             │    │             │    │             │  │
+│  │ Publisher   │    │ Subscriber  │    │ Service     │  │
+│  │             │    │             │    │ Server      │  │
+│  └─────────────┘    └─────────────┘    └─────────────┘  │
+│         │                   │                   │        │
+│         ▼                   ▼                   ▼        │
+│  ┌─────────────────────────────────────────────────────┐ │
+│  │                    DDS Layer                       │ │
+│  │         (Data Distribution Service)                │ │
+│  └─────────────────────────────────────────────────────┘ │
+│         ▲                   ▲                   ▲        │
+│         │                   │                   │        │
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐  │
+│  │   Topic 1   │    │   Topic 2   │    │  Service    │  │
+│  │             │    │             │    │    X        │  │
+│  │ Data Stream │    │ Data Stream │    │ Request/    │  │
+│  │             │    │             │    │ Response    │  │
+│  └─────────────┘    └─────────────┘    └─────────────┘  │
+└─────────────────────────────────────────────────────────┘
+
+## Communication Patterns
+
+### 1. Topics (Publish-Subscribe)
+┌─────────┐          ┌─────────┐          ┌─────────┐
+│         │ Publish  │         │ Messages │         │
+│ Publisher├─────────►Topic    ├──────────►Subscriber│
+│         │    to    │         │    on    │         │
+└─────────┘  Topic   └─────────┘   Topic  └─────────┘
+
+### 2. Services (Request-Response)
+┌─────────┐ Request  ┌─────────┐ Response ┌─────────┐
+│         │ ────────►│         │ ────────►│         │
+│ Client  │          │ Service │          │ Client  │
+│         │ ◄────────│ Server  │ ◄────────│         │
+└─────────┘ Response └─────────┘ Request  └─────────┘
+
+### 3. Actions (Goal-Feedback-Result)
+┌─────────┐ Goal     ┌─────────┐ Result   ┌─────────┐
+│ Action  │ ────────►│ Action  │ ────────►│ Action  │
+│ Client  │          │ Server  │          │ Client  │
+│         │ ◄────────│         │ ◄────────│         │
+└─────────┘ Feedback └─────────┘ Feedback └─────────┘

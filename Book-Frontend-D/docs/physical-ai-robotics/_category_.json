@@ -1,0 +1,8 @@
+{
+  "label": "Physical AI & Humanoid Robotics",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Exploring the connection between AI systems and physical robots through ROS 2, AI-robot communication, and humanoid modeling."
+  }
+}

@@ -1,0 +1,68 @@
+# Control Hierarchy Architecture in LLM-Driven Robotic Systems
+
+## Overview
+This diagram shows the hierarchical control structure that separates high-level reasoning from low-level execution in LLM-driven robotic systems.
+
+## Hierarchy Levels
+
+### Level 1: Cognitive Planning (High-Level)
+- LLM-based goal decomposition
+- Task planning and sequencing
+- Strategic decision making
+- Human interaction and communication
+- Long-term goal management
+- Interfaces with: Natural language input, world model, task queue
+
+### Level 2: Task and Motion Planning (Mid-Level)
+- Path planning and navigation
+- Manipulation planning
+- Obstacle avoidance planning
+- Resource allocation
+- Temporal coordination
+- Interfaces with: Cognitive planner, motion controllers, perception
+
+### Level 3: Execution Control (Low-Level)
+- Motor command generation
+- Real-time sensor processing
+- Reactive behaviors
+- Balance and stability control
+- Safety interlocks
+- Interfaces with: Hardware actuators, sensors, safety systems
+
+## Information Flow
+
+### Downward Flow (Commands)
+- High-level goals → Mid-level tasks → Low-level commands
+- Plan specifications with constraints
+- Execution parameters and tolerances
+
+### Upward Flow (Feedback)
+- Execution status and progress
+- Environmental changes and obstacles
+- Error conditions and exceptions
+- Resource availability updates
+
+### Lateral Flow (Coordination)
+- Perception data sharing
+- World model synchronization
+- Resource conflict resolution
+- Safety state sharing
+
+## Integration Points
+- Language interface at cognitive level
+- Perception integration across all levels
+- Safety systems at all levels
+- Human feedback mechanisms
+
+## Coordination Mechanisms
+- State synchronization protocols
+- Plan update procedures
+- Exception handling routines
+- Resource management protocols
+
+## Key Features
+- Clear separation of concerns
+- Appropriate abstraction levels
+- Robust communication protocols
+- Failure isolation capabilities
+- Scalable design principles

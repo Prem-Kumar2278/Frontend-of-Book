@@ -1,23 +1,69 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Premium homepage design for Physical AI & Humanoid Robotics
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 6rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--ifm-background-color) 80%, var(--ifm-color-accent) 20%) 0%,
+    color-mix(in srgb, var(--ifm-background-color) 95%, var(--ifm-color-accent) 5%) 100%);
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 3rem 1rem;
   }
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.mainTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+@media screen and (max-width: 996px) {
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .buttons {
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
+
+@media screen and (max-width: 576px) {
+  .buttons {
+    flex-direction: column;
+  }
+}
+
+.buttons a {
+  min-width: 180px;
+  text-align: center;
+}
+

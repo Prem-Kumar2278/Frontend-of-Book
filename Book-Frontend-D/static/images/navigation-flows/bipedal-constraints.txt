@@ -1,0 +1,40 @@
+# Bipedal Locomotion Constraints Diagram
+
+## Overview
+This diagram illustrates the specific constraints and challenges associated with bipedal movement in humanoid robot navigation, showing:
+- Balance and stability requirements
+- Dynamic walking vs static walking constraints
+- Step planning limitations
+- Gait pattern considerations
+
+## Key Constraints
+
+### Balance Constraints
+- Zero-Moment Point (ZMP) limitations
+- Center of Mass (CoM) positioning requirements
+- Support polygon constraints
+- Dynamic balance during movement
+
+### Kinematic Constraints
+- Joint angle limits
+- Step length restrictions
+- Step width limitations
+- Swing leg trajectory planning
+
+### Dynamic Constraints
+- Ground reaction forces
+- Inertial forces during movement
+- Acceleration limits
+- Angular momentum considerations
+
+### Environmental Constraints
+- Terrain adaptability
+- Surface friction requirements
+- Obstacle clearance needs
+- Foot placement restrictions
+
+## Impact on Navigation Planning
+- Path planning must account for balance maintenance
+- Turning radius limitations due to bipedal mechanics
+- Speed variations based on terrain complexity
+- Recovery strategies for disturbances

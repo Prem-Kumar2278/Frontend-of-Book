@@ -1,0 +1,64 @@
+# Goal Decomposition Process in LLM-Based Robotic Planning
+
+## Overview
+This diagram illustrates how large language models decompose high-level goals into executable robotic actions, showing the hierarchical planning process.
+
+## Decomposition Stages
+
+### Stage 1: Goal Analysis
+- High-level objective input (natural language)
+- Constraint identification
+- Feasibility assessment
+- Resource requirement estimation
+- Output: Structured goal representation
+
+### Stage 2: Subgoal Generation
+- Task breakdown using LLM reasoning
+- Prerequisite identification
+- Dependency mapping
+- Alternative approach consideration
+- Output: Set of subgoals with relationships
+
+### Stage 3: Action Sequencing
+- Temporal ordering of subgoals
+- Resource allocation planning
+- Conflict resolution
+- Critical path identification
+- Output: Ordered action sequence
+
+### Stage 4: Constraint Integration
+- Physical capability constraints
+- Environmental constraints
+- Safety constraints
+- Temporal constraints
+- Output: Feasible action plan
+
+### Stage 5: Execution Validation
+- Plan feasibility check
+- Safety verification
+- Resource availability confirmation
+- Risk assessment
+- Output: Validated executable plan
+
+## LLM Integration Points
+- Natural language goal interpretation
+- Common-sense reasoning application
+- Knowledge base utilization
+- Analogical reasoning for novel situations
+
+## Feedback Mechanisms
+- Plan execution monitoring
+- Deviation detection and correction
+- Learning from execution outcomes
+- Strategy refinement
+
+## Hierarchical Structure
+- High-level goals (what to achieve)
+- Mid-level tasks (how to approach)
+- Low-level actions (specific motor commands)
+
+## Key Considerations
+- Maintain plan flexibility for environmental changes
+- Balance optimality with computational efficiency
+- Ensure safety throughout decomposition process
+- Support plan revision based on execution feedback

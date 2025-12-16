@@ -1,30 +1,324 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Premium, modern documentation website for Physical AI & Humanoid Robotics
+ * Light Blue theme with minimal, research-grade design
  */
 
-/* You can override the default Infima variables here. */
+/* Light Blue, White, Soft Gray color palette */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Light Blue primary */
+  --ifm-color-primary: #4a90e2;
+  --ifm-color-primary-dark: #3a7bc8;
+  --ifm-color-primary-darker: #2a6bb3;
+  --ifm-color-primary-darkest: #1a5a9d;
+  --ifm-color-primary-light: #5a9fea;
+  --ifm-color-primary-lighter: #6aaaf1;
+  --ifm-color-primary-lightest: #7ab9f4;
+
+  /* White secondary */
+  --ifm-color-secondary: #ffffff;
+  --ifm-color-accent: #4a90e2; /* Light Blue accent */
+
+  /* Soft Gray */
+  --ifm-color-tertiary: #a0aec0;
+
+  /* Typography */
+  --ifm-font-size-base: 16px;
+  --ifm-code-font-size: 85%;
+  --docusaurus-highlighted-code-line-bg: rgba(74, 144, 226, 0.1);
+
+  /* Spacing */
+  --ifm-spacing-horizontal: 2rem;
+  --ifm-spacing-vertical: 2rem;
+
+  /* Border radius */
+  --ifm-global-radius: 8px;
+  --ifm-card-border-radius: 12px;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* Dark mode - primary theme */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #5a9fea;
+  --ifm-color-primary-dark: #4a90e2;
+  --ifm-color-primary-darker: #3a7bc8;
+  --ifm-color-primary-darkest: #2a6bb3;
+  --ifm-color-primary-light: #6aaaf1;
+  --ifm-color-primary-lighter: #7ab9f4;
+  --ifm-color-primary-lightest: #8bc8f7;
+
+  /* Light Blue accent */
+  --ifm-color-accent: #4a90e2;
+  --ifm-color-accent-secondary: #3a7bc8;
+
+  /* Backgrounds */
+  --ifm-background-color: #0a0a0a;
+  --ifm-background-surface-color: #0f0f0f;
+
+  --docusaurus-highlighted-code-line-bg: rgba(74, 144, 226, 0.15);
+}
+
+/* Light mode */
+[data-theme='light'] {
+  --ifm-color-primary: #4a90e2;
+  --ifm-color-primary-dark: #3a7bc8;
+  --ifm-color-primary-darker: #2a6bb3;
+  --ifm-color-primary-darkest: #1a5a9d;
+  --ifm-color-primary-light: #5a9fea;
+  --ifm-color-primary-lighter: #6aaaf1;
+  --ifm-color-primary-lightest: #7ab9f4;
+
+  --ifm-color-accent: #4a90e2;
+  --ifm-color-accent-secondary: #3a7bc8;
+
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8f9fa;
+
+  --docusaurus-highlighted-code-line-bg: rgba(74, 144, 226, 0.1);
+}
+
+/* Typography - Modern sans-serif */
+:root {
+  --ifm-font-family-base: 'Inter', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --ifm-font-family-monospace: 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+/* Global layout improvements */
+html {
+  font-feature-settings: 'liga' 1, 'calt' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--ifm-font-family-base);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Header and navigation */
+.navbar {
+  background-color: color-mix(in srgb, var(--ifm-background-color) 95%, var(--ifm-color-emphasis-0) 5%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid color-mix(in srgb, var(--ifm-color-emphasis-200) 30%, transparent 70%);
+  padding: 0.75rem 0;
+}
+
+.navbar__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.navbar__title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--ifm-color-primary);
+}
+
+.navbar__link {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Sidebar improvements */
+.menu {
+  padding: 1rem 0.5rem 1rem 1rem;
+}
+
+.menu__list {
+  gap: 0.25rem;
+}
+
+.menu__link {
+  border-radius: var(--ifm-card-border-radius);
+  margin: 0.125rem 0;
+  transition: all 0.2s ease;
+}
+
+.menu__link--active {
+  background-color: color-mix(in srgb, var(--ifm-color-accent) 10%, transparent 90%);
+  color: var(--ifm-color-accent);
+  font-weight: 600;
+}
+
+/* Main content area */
+.main-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Content styling */
+.markdown {
+  font-size: 1.1rem;
+}
+
+.markdown h1 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.markdown h2 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 2.5rem 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--ifm-color-emphasis-300) 30%, transparent 70%);
+}
+
+.markdown h3 {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 2rem 0 1rem 0;
+}
+
+/* Code blocks */
+.code-block {
+  border-radius: var(--ifm-card-border-radius);
+  border: 1px solid color-mix(in srgb, var(--ifm-color-emphasis-300) 20%, transparent 80%);
+  margin: 1rem 0;
+}
+
+/* Cards and containers */
+.card {
+  border-radius: var(--ifm-card-border-radius);
+  border: 1px solid color-mix(in srgb, var(--ifm-color-emphasis-300) 20%, transparent 80%);
+  transition: none;
+}
+
+.card:hover {
+  box-shadow: none;
+}
+
+/* Buttons */
+.button {
+  border-radius: var(--ifm-global-radius);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.button--primary {
+  background-color: var(--ifm-color-accent);
+  border-color: var(--ifm-color-accent);
+  color: var(--ifm-color-secondary);
+}
+
+.button--primary:hover {
+  background-color: var(--ifm-color-accent-secondary);
+  border-color: var(--ifm-color-accent-secondary);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+}
+
+/* Footer */
+.footer {
+  background-color: color-mix(in srgb, var(--ifm-background-color) 90%, var(--ifm-color-emphasis-0) 10%);
+  border-top: 1px solid color-mix(in srgb, var(--ifm-color-emphasis-200) 20%, transparent 80%);
+  padding: 2rem 0 1rem 0;
+}
+
+.footer__title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Custom content blocks for learning objectives and takeaways */
+.learning-objectives, .key-takeaways {
+  border-left: 4px solid var(--ifm-color-accent);
+  background-color: color-mix(in srgb, var(--ifm-color-accent) 5%, transparent 95%);
+  padding: 1.5rem;
+  border-radius: 0 var(--ifm-card-border-radius) var(--ifm-card-border-radius) 0;
+  margin: 1.5rem 0;
+}
+
+.learning-objectives h3, .key-takeaways h3 {
+  margin-top: 0;
+  color: var(--ifm-color-accent);
+  font-weight: 600;
+}
+
+/* Subtle gradient backgrounds */
+.hero {
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--ifm-background-color) 80%, var(--ifm-color-accent) 20%) 0%,
+    color-mix(in srgb, var(--ifm-background-color) 95%, var(--ifm-color-accent) 5%) 100%);
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effects */
+.navbar__link:hover,
+.menu__link:hover {
+  color: var(--ifm-color-accent);
+  background-color: transparent;
+}
+
+/* Custom RAG chatbot button styling */
+.chatbot-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  background: var(--ifm-color-primary);
+  color: var(--ifm-color-accent);
+  border: 1px solid var(--ifm-color-accent);
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.chatbot-float:hover {
+  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+  background: var(--ifm-color-accent);
+  color: var(--ifm-color-primary-darkest);
+}
+
+/* Language switcher styling */
+.navbar__item {
+  font-weight: 500;
+}
+
+/* Improved table styling */
+.markdown table {
+  border-radius: var(--ifm-card-border-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.markdown table th,
+.markdown table td {
+  padding: 0.75rem 1rem;
+}
+
+/* Blockquote styling */
+.markdown blockquote {
+  border-left: 3px solid var(--ifm-color-tertiary);
+  background-color: color-mix(in srgb, var(--ifm-color-tertiary) 8%, transparent 92%);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 var(--ifm-card-border-radius) var(--ifm-card-border-radius) 0;
+}
+
+/* Improved code inline styling */
+.markdown code {
+  background-color: color-mix(in srgb, var(--ifm-color-emphasis-200) 20%, transparent 80%);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+/* Better horizontal rule styling */
+.markdown hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, color-mix(in srgb, var(--ifm-color-emphasis-400) 40%, transparent 60%), transparent);
+  margin: 2rem 0;
 }

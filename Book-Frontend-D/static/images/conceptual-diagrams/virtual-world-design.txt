@@ -1,0 +1,155 @@
+# Virtual World Design Concept Diagram
+
+## Virtual World Architecture
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    VIRTUAL WORLD ARCHITECTURE                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                    MAIN SCENE GRAPH                                 ││
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     ││
+│  │  │   ENVIRONMENT   │  │    AGENTS       │  │    ROBOT        │     ││
+│  │  │   COMPONENTS    │  │   (Humans,      │  │   COMPONENTS    │     ││
+│  │  │                 │  │   Objects)      │  │                 │     ││
+│  │  │ • Static        │  │ • Virtual       │  │ • Kinematic     │     ││
+│  │  │   obstacles     │  │   humans        │  │   tree          │     ││
+│  │  │ • Ground planes │  │ • Animated      │  │ • Collision     │     ││
+│  │  │ • Buildings     │  │   objects       │  │   meshes        │     ││
+│  │  │ • Furniture     │  │ • Dynamic       │  │ • Sensor        │     ││
+│  │  │ • Terrains      │  │   elements      │  │   models        │     ││
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                 PHYSICS INTEGRATION                                 ││
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     ││
+│  │  │   COLLISION     │  │  DYNAMICS       │  │  CONSTRAINTS    │     ││
+│  │  │   SYSTEM        │  │  SIMULATION     │  │  & LIMITS       │     ││
+│  │  │                 │  │                 │  │                 │     ││
+│  │  │ • Broad-phase   │  │ • Rigid body    │  │ • Joint limits  │     ││
+│  │  │   collision     │  │   physics       │  │ • Actuator      │     ││
+│  │  │ • Narrow-phase  │  │ • Soft body     │  │   constraints   │     ││
+│  │  │   detection     │  │   simulation    │  │ • Workspace     │     ││
+│  │  │ • Response      │  │ • Fluid         │  │   boundaries    │     ││
+│  │  │   handling      │  │   dynamics      │  │ • Safety zones  │     ││
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Environment Design Hierarchy
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    ENVIRONMENT DESIGN HIERARCHY                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  GLOBAL ENVIRONMENT                                                     │
+│  ├─ World Scale & Boundaries                                             │
+│  ├─ Global Lighting & Weather                                           │
+│  └─ Large-Scale Geography                                               │
+│     │                                                                  │
+│     ├─ REGIONAL AREAS (e.g., rooms, zones)                            │
+│     │  ├─ Spatial Layout                                                │
+│     │  ├─ Functional Designation                                        │
+│     │  └─ Access Constraints                                            │
+│     │                                                                  │
+│     ├─ LOCAL ENVIRONMENTS (e.g., specific rooms)                      │
+│     │  ├─ Object Placement                                              │
+│     │  ├─ Interaction Zones                                             │
+│     │  └─ Navigation Spaces                                             │
+│     │                                                                  │
+│     └─ MICRO-ENVIRONMENTS (e.g., workstations)                        │
+│        ├─ Precise Object Arrangement                                    │
+│        ├─ Sensor Visibility Zones                                       │
+│        └─ Interaction Details                                           │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Human-Robot Interaction Modeling Layers
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                HRI MODELING LAYERS                                      │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  BEHAVIORAL LAYER (High-level)                                      ││
+│  │  • Intent Modeling: Goals, Motivations                             ││
+│  │  • Social Protocols: Etiquette, Turn-taking                        ││
+│  │  • Emotional States: Mood, Engagement Level                        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  ACTION LAYER (Mid-level)                                           ││
+│  │  • Gesture Selection: Waves, Pointing, Postures                    ││
+│  │  • Movement Patterns: Walking, Sitting, Reaching                   ││
+│  │  • Verbal Expression: Speech Patterns, Tone                        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  PHYSICAL LAYER (Low-level)                                         ││
+│  │  • Animation: Smooth Body Movements                                ││
+│  │  • Collision Avoidance: Personal Space Maintenance                 ││
+│  │  • Sensor Simulation: How Virtual Humans Appear to Robot Sensors   ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Complexity vs. Performance Trade-offs
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                COMPLEXITY TRADE-OFFS                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  VISUAL COMPLEXITY                                                  ││
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     ││
+│  │  │   HIGH DETAIL   │  │  BALANCED       │  │   LOW DETAIL    │     ││
+│  │  │   • Photoreal   │  │  • Realistic    │  │  • Simplified   │     ││
+│  │  │   • Complex     │  │  • Efficient    │  │  • Fast         │     ││
+│  │  │   • Beautiful   │  │  • Practical    │  │  • Limited      │     ││
+│  │  │   • Slow        │  │  • Good Perf.   │  │  • Training OK  │     ││
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  PHYSICS COMPLEXITY                                                 ││
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     ││
+│  │  │   REALISTIC     │  │  APPROXIMATE    │  │   ABSTRACT      │     ││
+│  │  │   • Accurate    │  │  • Reasonable   │  │  • Minimal      │     ││
+│  │  │   • True to     │  │  • Compromise   │  │  • Functional   │     ││
+│  │  │   • Physics     │  │  • Good Perf.   │  │  • Fast         │     ││
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  INTERACTION COMPLEXITY                                             ││
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     ││
+│  │  │   RICH          │  │  MODERATE       │  │   BASIC         │     ││
+│  │  │   • Natural     │  │  • Structured   │  │  • Scripted     │     ││
+│  │  │   • Adaptive    │  │  • Predictable  │  │  • Repetitive   │     ││
+│  │  │   • Complex     │  │  • Manageable   │  │  • Efficient    │     ││
+│  │  │   • Computation │  │  • Good Perf.   │  │  • Training OK  │     ││
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Training Scenario Design Framework
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│              TRAINING SCENARIO DESIGN                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  PROGRESSIVE DIFFICULTY CURVE                                      ││
+│  │  Beginner    Intermediate      Advanced       Expert              ││
+│  │    │              │                │              │                ││
+│  │    ▼              ▼                ▼              ▼                ││
+│  │  Simple      Challenging      Complex       Open-ended           ││
+│  │  Static      Dynamic          Variable      Unpredictable        ││
+│  │  Predictable   Moderate         High          Maximum            ││
+│  │  Errors      Variability      Uncertainty   Adaptability         ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  SIM2REAL TRANSFER FOCUS                                           ││
+│  │  • Domain Randomization: Vary simulation parameters                ││
+│  │  • System Identification: Match real robot characteristics         ││
+│  │  • Sensor Calibration: Align simulated and real sensors            ││
+│  │  • Validation Approach: Test simulation accuracy against reality   ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘

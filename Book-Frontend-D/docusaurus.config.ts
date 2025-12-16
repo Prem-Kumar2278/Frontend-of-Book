@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'Physical AI & Humanoid Robotics',
+  tagline: 'Comprehensive Curriculum on Vision-Language-Action Integration for Autonomous Robots',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -32,7 +32,17 @@ const config: Config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'ur'],
+    localeConfigs: {
+      en: {
+        label: 'English',
+        direction: 'ltr',
+      },
+      ur: {
+        label: 'اردو',
+        direction: 'rtl',
+      },
+    },
   },
 
   presets: [
@@ -68,6 +78,13 @@ const config: Config = {
     ],
   ],
 
+  themes: [
+    // Additional themes can be added here
+  ],
+
+  plugins: [
+  ],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
@@ -75,70 +92,63 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'My Site',
-      logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
-      },
+      title: 'Physical AI & Humanoid Robotics',
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          to: '/docs/intro',
           position: 'left',
-          label: 'Tutorial',
+          label: 'TextBook',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
           position: 'right',
         },
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light', // Changed to light for better consistency
       links: [
         {
-          title: 'Docs',
+          title: 'Modules',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Module 1: Physical AI & Robotics',
+              to: '/docs/physical-ai-robotics/intro',
+            },
+            {
+              label: 'Module 2: Digital Twin Simulation',
+              to: '/docs/digital-twin-simulation/intro',
+            },
+            {
+              label: 'Module 3: AI-Robot Brain',
+              to: '/docs/ai-robot-brain/intro',
+            },
+            {
+              label: 'Module 4: Vision-Language-Action',
+              to: '/docs/vision-language-action/intro',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Resources',
           items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
             {
               label: 'GitHub',
               href: 'https://github.com/facebook/docusaurus',
             },
+            {
+              label: 'TextBook',
+              to: '/docs/intro',
+            },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Physical AI & Humanoid Robotics — Embodied Intelligence in the Physical World`,
     },
     prism: {
       theme: prismThemes.github,

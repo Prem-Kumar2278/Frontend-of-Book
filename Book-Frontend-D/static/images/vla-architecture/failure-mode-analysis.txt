@@ -1,0 +1,71 @@
+# Failure Mode Analysis for VLA Systems
+
+## Overview
+This diagram analyzes potential failure modes in Vision-Language-Action systems and their impact on system operation, along with mitigation strategies.
+
+## Failure Categories by System Layer
+
+### Language Understanding Failures
+- **Speech Recognition Errors**: Misrecognition of spoken commands
+  - Impact: Incorrect intent interpretation
+  - Mitigation: Confidence scoring, clarification requests
+- **Intent Misclassification**: Wrong understanding of user goal
+  - Impact: Execution of incorrect task
+  - Mitigation: Confirmation requests, intent validation
+- **Context Loss**: Failure to maintain conversational context
+  - Impact: Inappropriate responses to follow-up commands
+  - Mitigation: Context validation, explicit context management
+
+### Perception Failures
+- **Object Recognition Errors**: Misidentification of objects
+  - Impact: Manipulation of wrong object
+  - Mitigation: Multiple verification steps, uncertainty modeling
+- **Localization Drift**: Inaccurate position estimation
+  - Impact: Navigation failures, collision risk
+  - Mitigation: Continuous relocalization, sensor fusion
+- **Scene Understanding Errors**: Misinterpretation of spatial relationships
+  - Impact: Unsafe navigation, failed manipulation
+  - Mitigation: Multi-view verification, geometric consistency checks
+
+### Planning Failures
+- **Infeasible Plan Generation**: Plans that cannot be executed
+  - Impact: Task failure, potential safety issues
+  - Mitigation: Plan validation, capability checking
+- **Suboptimal Planning**: Inefficient or unsafe plan sequences
+  - Impact: Poor performance, extended execution time
+  - Mitigation: Plan optimization, safety constraints
+- **Plan Inconsistency**: Conflicting subgoals or actions
+  - Impact: Task failure, resource conflicts
+  - Mitigation: Constraint checking, plan coordination
+
+### Execution Failures
+- **Motor Control Errors**: Failed actuator commands
+  - Impact: Incomplete or incorrect actions
+  - Mitigation: Control monitoring, fallback behaviors
+- **Balance Loss**: Stability issues in humanoid robots
+  - Impact: Falls, potential damage or injury
+  - Mitigation: Balance recovery, safe stopping
+- **Sensor Malfunction**: Failed or inaccurate sensor data
+  - Impact: Poor decision making, safety issues
+  - Mitigation: Sensor validation, redundancy
+
+## Cross-Layer Failure Propagation
+- Language errors affecting planning (wrong goals)
+- Perception errors affecting execution (wrong targets)
+- Planning errors affecting safety (unsafe motions)
+- Execution errors affecting perception (sensor misalignment)
+
+## Mitigation Strategies
+- **Redundancy**: Multiple systems for critical functions
+- **Validation**: Continuous checking of system states
+- **Fallbacks**: Safe default behaviors when primary systems fail
+- **Monitoring**: Real-time detection of anomalous behavior
+- **Human Intervention**: Override capabilities for safety
+- **Graceful Degradation**: Reduced functionality rather than complete failure
+
+## Recovery Mechanisms
+- Error detection and classification
+- Appropriate response selection
+- System state restoration
+- Task resumption or safe termination
+- Learning from failures to prevent recurrence

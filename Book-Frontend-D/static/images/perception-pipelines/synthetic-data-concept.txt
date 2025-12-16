@@ -1,0 +1,208 @@
+# Synthetic Data Generation - Perception Pipeline Concept Diagram
+
+## Synthetic Data Generation Process
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    SYNTHETIC DATA GENERATION PIPELINE                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐      │
+│  │   REAL WORLD    │    │  SIMULATION     │    │  SYNTHETIC      │      │
+│  │   REFERENCE     │───▶│   ENGINE        │───▶│  DATASET        │      │
+│  │                 │    │                 │    │                 │      │
+│  │ • Environmental │    │ • Physics       │    │ • Labeled       │      │
+│  │   conditions    │    │   simulation    │    │   sensor data   │      │
+│  │ • Lighting      │    │ • Photorealistic│    │ • Ground truth  │      │
+│  │   variations    │    │   rendering     │    │   annotations   │      │
+│  │ • Material      │    │ • Sensor        │    │ • Diverse       │      │
+│  │   properties    │    │   modeling      │    │   scenarios     │      │
+│  └─────────────────┘    │ • Domain        │    └─────────────────┘      │
+│                         │   randomization │                             │
+│                         └─────────────────┘                             │
+│                                 │                                       │
+│                                 ▼                                       │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                    SIMULATION PIPELINE                            ││
+│  │  Environment → Physics → Rendering → Sensor → Dataset           ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Detailed Pipeline Stages
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    SIMULATION PIPELINE STAGES                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  STAGE 1: ENVIRONMENT SETUP                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Scene composition with 3D models                              ││
+│  │  • Material assignment and physical properties                     ││
+│  │  • Lighting setup and environmental conditions                     ││
+│  │  • Robot placement and initial configuration                       ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STAGE 2: PHYSICS SIMULATION                                            │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Rigid body dynamics and collision detection                     ││
+│  │  • Soft body and fluid simulation (if applicable)                  ││
+│  │  • Contact mechanics and friction modeling                         ││
+│  │  • Multi-body interaction and constraint solving                   ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STAGE 3: RENDERING & VISUAL PROCESSING                                 │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Ray tracing and global illumination                            ││
+│  │  • Texture mapping and material rendering                         ││
+│  │  • Anti-aliasing and post-processing effects                       ││
+│  │  • Realistic optical effects (lens distortion, etc.)              ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STAGE 4: SENSOR SIMULATION                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Camera image generation with realistic noise                   ││
+│  │  • LiDAR point cloud creation with beam modeling                  ││
+│  │  • IMU data simulation with drift and bias                        ││
+│  │  • Force/torque sensor readings with realistic errors             ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STAGE 5: ANNOTATION & LABELING                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Semantic segmentation masks for each pixel                     ││
+│  │  • Instance segmentation for object identification                 ││
+│  │  • 3D bounding boxes and pose annotations                         ││
+│  │  • Ground truth for training and validation                        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Domain Randomization Techniques
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    DOMAIN RANDOMIZATION METHODS                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  VISUAL DOMAIN RANDOMIZATION                                       ││
+│  │  • Texture randomization: Varying surface appearances              ││
+│  │  • Lighting randomization: Changing intensity, color, direction   ││
+│  │  • Color randomization: Adjusting hue, saturation, brightness     ││
+│  │  • Camera parameter randomization: Noise, distortion, exposure    ││
+│  │  • Background randomization: Different environments and layouts   ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  PHYSICAL DOMAIN RANDOMIZATION                                     ││
+│  │  • Friction coefficient randomization: Varying surface properties ││
+│  │  • Mass property randomization: Changing object weights           ││
+│  │  • Inertia tensor randomization: Varying object dynamics          ││
+│  │  • Joint friction randomization: Varying robot kinematics         ││
+│  │  • Actuator parameter randomization: Varying motor characteristics││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  DYNAMIC DOMAIN RANDOMIZATION                                      ││
+│  │  • Wind force randomization: Simulating environmental forces       ││
+│  │  • Gravity parameter randomization: Varying gravitational effects ││
+│  │  • Temperature effects: Simulating thermal variations             ││
+│  │  • Wear and tear simulation: Modeling component degradation       ││
+│  │  • Sensor drift simulation: Modeling time-dependent errors        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Reality Gap Closure Strategies
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    REALITY GAP CLOSURE STRATEGIES                       │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ADVERSARIAL APPROACHES                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Domain adaptation networks: Learning to match sim and real      ││
+│  │  • Generative adversarial networks: Making sim look like real      ││
+│  │  • Feature alignment: Matching representations across domains      ││
+│  │  • Cycle consistency: Ensuring bidirectional similarity            ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  GRADIENT-BASED METHODS                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • System identification: Tuning sim parameters to match real      ││
+│  │  • Differentiable simulation: Learning sim parameters via gradients││
+│  │  • Gradient matching: Aligning gradients across domains            ││
+│  │  • Meta-learning: Learning to adapt quickly to new domains         ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  FEEDBACK-DRIVEN APPROACHES                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Progressive domain adaptation: Gradually shifting sim to real   ││
+│  │  • Online adaptation: Updating during real-world deployment        ││
+│  │  • Curriculum learning: Starting with sim, moving toward real      ││
+│  │  • Self-supervised learning: Using unlabeled real data             ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## NVIDIA Isaac Integration Points
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    ISAAC SIMULATION ECOSYSTEM                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  ISAAC SIM CORE COMPONENTS                                         ││
+│  │  • Omniverse platform: Collaborative simulation environment        ││
+│  │  • PhysX physics: High-fidelity physics simulation                 ││
+│  │  • RTX rendering: Photorealistic graphics rendering                ││
+│  │  • ROS 2 bridge: Seamless integration with robotics ecosystem      ││
+│  │  • Synthetic data tools: Automated dataset generation              ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  ISAAC ROS INTEGRATION                                             ││
+│  │  • GPU-accelerated perception: Fast processing of sensor data      ││
+│  │  • Hardware abstraction: Consistent interfaces across platforms    ││
+│  │  • Production optimization: Ready for real-world deployment        ││
+│  │  • Standard interfaces: Compatible with existing ROS packages      ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  SYNTHETIC DATA WORKFLOWS                                          ││
+│  │  • Automated annotation: Ground truth generation                   ││
+│  │  • Domain randomization: Built-in parameter variation              ││
+│  │  • Dataset management: Tools for organizing synthetic datasets     ││
+│  │  • Quality assurance: Validation of synthetic data quality         ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Output Data Formats
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    SYNTHETIC DATA OUTPUT FORMATS                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  SENSOR DATA TYPES                                                 ││
+│  │  • RGB images: Camera sensor outputs with realistic noise          ││
+│  │  • Depth maps: Accurate distance measurements                      ││
+│  │  • Point clouds: LiDAR and 3D sensor data                          ││
+│  │  • IMU readings: Acceleration, angular velocity, magnetic field    ││
+│  │  • Force/torque: Contact force measurements                        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  ANNOTATION TYPES                                                  ││
+│  │  • Semantic segmentation: Pixel-level category labels              ││
+│  │  • Instance segmentation: Object instance identification           ││
+│  │  • Panoptic segmentation: Combined semantic and instance labeling  ││
+│  │  • 3D bounding boxes: Object location and size in 3D space         ││
+│  │  • Pose estimation: Object orientation and position                ││
+│  │  • Keypoint detection: Joint locations for articulated objects     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  DATASET STRUCTURE                                                 ││
+│  │  • Frame synchronization: Matching sensor data across modalities   ││
+│  │  • Metadata: Timestamps, camera parameters, calibration data       ││
+│  │  • Quality metrics: Measures of synthetic data fidelity            ││
+│  │  • Validation sets: Separate data for sim2real transfer evaluation ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘

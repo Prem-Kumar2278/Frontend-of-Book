@@ -1,0 +1,27 @@
+# Path Planning Basics Diagram
+
+## Overview
+This diagram illustrates the fundamental concepts of path planning for humanoid robots, showing:
+- The relationship between global path planning and local path planning
+- Different path planning approaches (sampling-based vs optimization-based)
+- Key considerations for humanoid-specific navigation
+
+## Components
+- Start and goal positions
+- Obstacle representation
+- Feasible path candidates
+- Optimal path selection
+- Humanoid-specific constraints
+
+## Process Flow
+1. Environmental mapping and obstacle detection
+2. Global path planning (topological route)
+3. Local path planning (collision avoidance)
+4. Path optimization considering humanoid dynamics
+5. Execution with feedback control
+
+## Humanoid-Specific Considerations
+- Balance constraints during movement
+- Step location planning for bipedal locomotion
+- ZMP (Zero-Moment Point) trajectory planning
+- Gait pattern adaptation based on terrain

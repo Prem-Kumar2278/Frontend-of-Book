@@ -1,0 +1,78 @@
+# Vision-Language-Action (VLA) System Architecture
+
+## Overview
+This diagram illustrates the complete architecture of a Vision-Language-Action system, showing the integration of voice input, language understanding, perception, cognitive planning, and motion execution.
+
+## System Components
+
+### Input Layer
+- Voice input (microphones, speech recognition)
+- Visual input (cameras, depth sensors)
+- Other modalities (touch, environmental sensors)
+- Multi-modal fusion interface
+
+### Language Understanding Layer
+- Automatic Speech Recognition (ASR)
+- Natural Language Understanding (NLU)
+- Intent recognition and classification
+- Context management
+- Dialogue state tracking
+
+### Perception Layer
+- Visual perception and object recognition
+- Spatial mapping and localization
+- Scene understanding
+- Dynamic obstacle detection
+- Environmental modeling
+
+### Cognitive Planning Layer
+- LLM-based reasoning
+- Goal decomposition
+- Task planning
+- Action selection
+- Plan validation
+
+### Motion Execution Layer
+- Motion planning
+- Path planning
+- Motor control
+- Balance and stability
+- Safety systems
+
+## Information Flow
+
+### Forward Flow (Processing Path)
+- Voice input → Language understanding → Cognitive planning → Motion execution
+- Visual input → Perception → Cognitive planning → Motion execution
+- Multi-modal fusion at appropriate integration points
+
+### Feedback Flow (Monitoring Path)
+- Execution status to planning
+- Environmental changes to perception and planning
+- Safety conditions to all layers
+- Performance metrics to learning systems
+
+### Control Flow (Coordination Path)
+- Plan execution commands
+- Resource allocation
+- Priority management
+- Exception handling
+
+## Integration Points
+- Language-perception bridge for object reference resolution
+- Planning-execution interface for action translation
+- Perception-action feedback for adaptive behavior
+- Multi-modal coordination for coherent responses
+
+## Safety and Monitoring
+- Continuous safety monitoring
+- Plan validation before execution
+- Exception detection and handling
+- Human intervention capabilities
+
+## Key Design Principles
+- Modularity with well-defined interfaces
+- Robustness to component failures
+- Real-time performance requirements
+- Scalability for different robot platforms
+- Safety-first architecture

@@ -1,0 +1,108 @@
+# Physics Simulation Environment Illustration
+
+## Virtual Physics World Setup
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    DIGITAL TWIN PHYSICS ENVIRONMENT                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│  Z+                                                                   │
+│  │                                                                     │
+│  │    ┌─────────────────────────────────────────────────────────────┐  │
+│  │    │                    CEILING                                  │  │
+│  │    └─────────────────────────────────────────────────────────────┘  │
+│  │           │                │                │                │      │
+│  │           ▼                ▼                ▼                ▼      │
+│  │    ┌─────────┐      ┌─────────┐      ┌─────────┐      ┌─────────┐   │
+│  │    │  ROBOT  │      │  TABLE  │      │  BALL   │      │  BOX    │   │
+│  │    │         │      │         │      │         │      │         │   │
+│  │    │  ┌─┐    │      │         │      │    ○    │      │  ┌─────┐│   │
+│  │    │  │H│    │      │         │      │         │      │  │     ││   │
+│  │    │  └─┘    │      │         │      │         │      │  │     ││   │
+│  │    │ ┌─┼─┐   │      │         │      │         │      │  │     ││   │
+│  │    │ │ │ │   │      │         │      │         │      │  │     ││   │
+│  │    │ └─┼─┘   │      │         │      │         │      │  │     ││   │
+│  │    │  ┌┴─┐   │      │         │      │         │      │  │     ││   │
+│  │    │  └──┘   │      │         │      │         │      │  │     ││   │
+│  │    │    │    │      │         │      │         │      │  │     ││   │
+│  │    └─────────┘      └─────────┘      └─────────┘      └─────────┘   │
+│  │           ▼                ▼                ▼                ▼      │
+│  │    ┌─────────────────────────────────────────────────────────────┐  │
+│  │    │                    FLOOR (Ground Plane)                     │  │
+│  │    │              (Infinite collision surface)                   │  │
+│  │    └─────────────────────────────────────────────────────────────┘  │
+│  │                                                                     │
+│  └───────────────────────────────────────────────────────────────── X+ │
+│                 Y+ →                                                                 │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Physics Properties Applied
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        PHYSICS PROPERTIES                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│  Environment:                                                           │
+│  • Gravity: -9.81 m/s² (Z-axis downward)                               │
+│  • Air resistance: Modeled (optional)                                  │
+│  • Friction coefficients: Adjustable per material                      │
+│  • Damping: Applied to reduce oscillations                             │
+│                                                                         │
+│  Robot:                                                                 │
+│  • Mass: Distributed across links                                      │
+│  • Inertia: Tensor calculated per link                                 │
+│  • Joint limits: Enforced (position, velocity, torque)                │
+│  • Collision shapes: Simplified for efficiency                         │
+│                                                                         │
+│  Objects:                                                               │
+│  • Table: Static (infinite mass)                                       │
+│  • Ball: Dynamic with realistic bounce (elasticity)                   │
+│  • Box: Dynamic with friction and rotation                            │
+│                                                                         │
+│  Constraints:                                                           │
+│  • Robot joints: Revolute/prismatic with limits                       │
+│  • Ground contact: Prevents penetration                                │
+│  • Joint couplings: Maintain kinematic chains                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Force Application and Response
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    FORCE APPLICATION FLOW                             │
+├─────────────────────────────────────────────────────────────────────────┤
+│  Applied Forces → Physics Integration → Collision Detection → Response  │
+│                                                                         │
+│  Applied Forces:                                                        │
+│  • Gravity (constant, downward)                                        │
+│  • Actuator forces (robot joints)                                      │
+│  • External forces (user interaction, wind)                           │
+│  • Contact forces (collision responses)                                │
+│                                                                         │
+│  Physics Integration:                                                   │
+│  • Position update: x = x₀ + v·t + ½·a·t²                            │
+│  • Velocity update: v = v₀ + a·t                                      │
+│  • Acceleration: a = F/m (Newton's second law)                        │
+│                                                                         │
+│  Collision Response:                                                    │
+│  • Impulse calculation: J = -(1+e)·vₙ / (1/m₁ + 1/m₂)                │
+│  • Position correction: Penetration resolution                         │
+│  • Friction forces: Static and dynamic friction applied               │
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Simulation Accuracy Factors
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   ACCURACY FACTORS                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│  Time Step Size:                                                        │
+│  • Smaller steps = Higher accuracy but slower performance             │
+│  • Typical ranges: 1ms to 10ms for robotics applications              │
+│                                                                         │
+│  Numerical Integration:                                                 │
+│  • Euler (fast, less accurate)                                         │
+│  • Runge-Kutta (accurate, more computation)                           │
+│  • Semi-implicit (balance of accuracy and stability)                  │
+│                                                                         │
+│  Collision Detection:                                                   │
+│  • Discrete (snapshot-based, may miss fast collisions)                │
+│  • Continuous (prediction-based, more accurate)                       │
+│  • Hybrid approaches (balance performance vs accuracy)                │
+└─────────────────────────────────────────────────────────────────────────┘

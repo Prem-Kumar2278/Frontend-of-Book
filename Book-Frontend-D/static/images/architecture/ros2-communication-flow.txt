@@ -1,0 +1,37 @@
+# ROS 2 Communication Flow - Architecture Sketch
+
+## High-Level Architecture
+
+Robot System
+├── Sensors (Camera, LiDAR, IMU, etc.)
+│   └── Publish data to Topics
+├── AI Processing Nodes
+│   ├── Perception Node
+│   ├── Planning Node
+│   └── Decision Node
+├── Control Nodes
+│   ├── Path Following
+│   └── Motor Control
+└── Actuators (Motors, Grippers, etc.)
+
+## Communication Patterns
+
+### Topic Communication (Publish-Subscribe)
+Sensors → /sensor_data_topic → Perception Node
+Perception → /detected_objects_topic → Planning Node
+Planning → /commands_topic → Control Nodes
+
+### Service Communication (Request-Response)
+External App → /navigation_service → Path Planning (Request: "Go to X", Response: "Path calculated")
+
+### Action Communication (Goal-Feedback-Result)
+Navigation System → /move_to_goal_action → Base Controller
+├── Goal: "Move to position X,Y"
+├── Feedback: "Progress: 30% to goal"
+└── Result: "Successfully reached goal"
+
+## Nervous System Analogy
+
+Brain (AI Algorithms) ↔ Spinal Cord (ROS 2 Middleware) ↔ Body (Sensors & Actuators)
+├── Sensory Pathway: Sensors → ROS 2 → AI
+└── Motor Pathway: AI → ROS 2 → Actuators

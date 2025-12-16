@@ -1,0 +1,251 @@
+# IMU Sensor Data Flow Diagram
+
+## IMU Simulation Architecture
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                           IMU SIMULATION SYSTEM                         │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐      │
+│  │   PHYSICS       │    │   INTEGRATION    │    │   SENSOR        │      │
+│  │   ENGINE        │───▶│   SIMULATION      │───▶│   MODEL         │      │
+│  │                 │    │                 │    │                 │      │
+│  │ • Acceleration  │    │ • State         │    │ • Bias modeling │      │
+│  │ • Rotation      │    │   propagation   │    │ • Noise models  │      │
+│  │ • Forces        │    │ • Integration   │    │ • Drift effects │      │
+│  │ • Torques       │    │ • Temporal      │    │ • Calibration   │
+│  └─────────────────┘    │   dynamics      │    │   parameters    │      │
+│         │                └─────────────────┘    └─────────────────┘      │
+│         ▼                       │                       │                │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                    SIMULATION PIPELINE                              ││
+│  │  Physics → State → Integration → Noise → IMU Readings             ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## IMU Data Generation Process
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          IMU DATA GENERATION                            │
+├─────────────────────────────────────────────────────────────────────────┤
+│  STEP 1: PHYSICS STATE ACCESS                                            │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Retrieve current robot state (position, velocity, orientation) ││
+│  │  • Access derivative information (acceleration, angular velocity)   ││
+│  │  • Obtain environmental forces acting on the robot                  ││
+│  │  • Get applied torques and forces from actuators                     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 2: IDEAL MEASUREMENT CALCULATION                                   │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Calculate true linear acceleration in IMU frame                 ││
+│  │  • Calculate true angular velocity in IMU frame                    ││
+│  │  • Transform to IMU coordinate system                              │
+│  │  • Apply gravity compensation if appropriate                        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 3: SYSTEMATIC ERROR MODELS                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Apply scale factor errors (gain/offset)                         ││
+│  │  • Add bias terms (constant offsets)                               ││
+│  │  • Include cross-axis sensitivity (cross-coupling)                 ││
+│  │  • Apply temperature-dependent corrections                          ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 4: NOISE AND DRIFT ADDITION                                        │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Add white Gaussian noise (random measurement errors)            ││
+│  │  • Include random walk (gyro drift, accelerometer bias diffusion) ││
+│  │  • Apply quantization noise (ADC discretization)                   ││
+│  │  • Add flicker noise (low-frequency fluctuations)                  ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 5: TEMPORAL DYNAMICS                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Model thermal drift over time                                   ││
+│  │  • Include startup transients and warm-up effects                  ││
+│  │  • Apply aging effects (long-term bias changes)                    ││
+│  │  • Account for vibration and shock effects                         ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  STEP 6: OUTPUT FORMATTING                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Package as standard IMU data format                              ││
+│  │  • Add timestamp and synchronization information                     ││
+│  │  • Include calibration parameters and status flags                 ││
+│  │  • Format for ROS/other standard messaging protocols                ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## IMU Sensor Components and Characteristics
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          IMU COMPONENTS                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ACCELEROMETER SIMULATION                                                │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Measures: Linear acceleration along 3 axes                      ││
+│  │  • Range: ±2g to ±16g depending on model                           ││
+│  │  • Sensitivity: 8,192 to 2,048 LSB/g (for 16-bit ADC)             ││
+│  │  • Bandwidth: DC to 1kHz depending on model                        ││
+│  │  • Noise Density: 25 to 400 μg/√Hz                                 ││
+│  │  • Bias Instability: 10 to 1000 μg (1σ)                            ││
+│  │  • Scale Factor Error: ±0.1% to ±1%                                ││
+│  │  • Cross-Axis Sensitivity: ±1% to ±5%                              ││
+│  │  • Non-Linearity: ±0.01% to ±0.1%                                  ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  GYROSCOPE SIMULATION                                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Measures: Angular velocity around 3 axes                        ││
+│  │  • Range: ±250°/s to ±2000°/s depending on model                  ││
+│  │  • Sensitivity: 131 to 16.4 LSB/(°/s) (for 16-bit ADC)            ││
+│  │  • Bandwidth: DC to 1kHz depending on model                        ││
+│  │  • Noise Density: 0.002 to 0.05 °/s/√Hz                           ││
+│  │  • Bias Instability: 1 to 20 °/h (1σ)                             ││
+│  │  • Scale Factor Error: ±0.1% to ±1%                                ││
+│  │  • Cross-Axis Sensitivity: ±1% to ±5%                              ││
+│  │  • Rate Random Walk: 0.1 to 10 °/h/√Hz                            ││
+│  │  • Angle Random Walk: 0.3 to 20 °/√h                              ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  MAGNETOMETER SIMULATION (if present)                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  • Measures: Magnetic field strength along 3 axes                  ││
+│  │  • Range: ±1300 μT to ±4800 μT depending on model                ││
+│  │  • Resolution: 15 to 688 nT/bit depending on model                 ││
+│  │  • Noise: 100 to 500 nT rms                                        ││
+│  │  • Offset Drift: ±0.4 to ±2 nT/°C                                 ││
+│  │  • Non-Linearity: ±0.1% to ±1%                                     ││
+│  │  • Cross-Axis Sensitivity: ±1% to ±5%                              ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Noise Modeling in Detail
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          NOISE MODELS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  WHITE GAUSSIAN NOISE                                                ││
+│  │  • Model: Random samples from normal distribution                    ││
+│  │  • Formula: w[n] ~ N(0, σ²)                                         ││
+│  │  • Effect: Instantaneous measurement uncertainty                     ││
+│  │  • Implementation: Random number generator with specified variance   ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  RANDOM WALK (INTEGRATION DRIFT)                                     ││
+│  │  • Model: Cumulative sum of white noise                              ││
+│  │  • Formula: r[n] = r[n-1] + w[n], where w ~ N(0, q²)               ││
+│  │  • Effect: Long-term drift that accumulates over time                ││
+│  │  • Implementation: Maintain internal state and integrate noise       ││
+│  │  • Gyros: Causes orientation drift                                   ││
+│  │  • Accelerometers: Causes velocity/position drift                    ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  QUANTIZATION NOISE                                                  ││
+│  │  • Model: Rounding/truncation errors in digitization                 ││
+│  │  • Formula: q[n] = round(x_true/step_size) * step_size - x_true    ││
+│  │  • Effect: Discrete steps in continuous measurements                 ││
+│  │  • Implementation: Round to nearest quantization level               ││
+│  │  • Variance: (step_size)²/12 for uniform distribution               ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  FLICKER/BROWNIAN NOISE                                              ││
+│  │  • Model: 1/f noise with power spectral density ∝ 1/f              ││
+│  │  • Effect: Low-frequency fluctuations that persist over time        ││
+│  │  • Implementation: Filter white noise with 1/f characteristic       ││
+│  │  • Characteristic: Correlated, non-stationary behavior               ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  BIAS INSTABILITY (ALLAN VARIANCE)                                   ││
+│  │  • Model: Combination of noise sources over different time scales    ││
+│  │  • Effect: Time-varying bias that affects long-term accuracy         ││
+│  │  • Implementation: Complex model with multiple noise processes       ││
+│  │  • Characteristic: Determined by Allan variance plot analysis        ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Drift Modeling and Temporal Effects
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        DRIFT MODELING                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  GYROSCOPE DRIFT                                                     ││
+│  │  • Primary effect: Orientation estimation drift                      ││
+│  │  • Rate: 0.1 to 10 degrees per hour (depending on grade)           ││
+│  │  • Integration: Δθ = ∫(ω_measurement - ω_true) dt                   ││
+│  │  • Impact: Accumulates over time, causes navigation errors           ││
+│  │  • Compensation: Periodic recalibration using other sensors         ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  ACCELEROMETER DRIFT                                                 ││
+│  │  • Primary effect: Velocity and position estimation drift            ││
+│  │  • Rate: Depends on bias instability (μg level)                     ││
+│  │  • Double integration: Δp = ∬(a_measurement - a_true) dt²          ││
+│  │  • Impact: Rapid error accumulation in position estimates            ││
+│  │  • Compensation: External position references (GPS, visual)         ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  TEMPERATURE EFFECTS                                                 ││
+│  │  • Bias shift: Change in sensor bias with temperature               ││
+│  │  • Scale factor: Change in sensitivity with temperature             ││
+│  │  • Zero-rate: Shift in zero-point with temperature                   ││
+│  │  • Model: Polynomial fit to temperature characteristics              ││
+│  │  • Compensation: Temperature sensors + calibration curves           ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  AGING EFFECTS                                                       ││
+│  │  • Bias drift: Long-term changes in sensor characteristics          ││
+│  │  • Scale factor: Slow changes in sensitivity over time              ││
+│  │  • Threshold: Significant changes over months/years                 ││
+│  │  • Model: Random walk or linear drift processes                     ││
+│  │  • Mitigation: Periodic recalibration procedures                     ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘
+
+## Data Flow and Processing
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      IMU DATA PROCESSING                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│  RAW READINGS → CALIBRATION → FILTERING → INTEGRATION → APPLICATION    │
+│                                                                         │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐         │
+│  │   RAW IMU       │  │  CALIBRATED     │  │   PROCESSED     │         │
+│  │   READINGS      │  │  MEASUREMENTS   │  │   ESTIMATES     │         │
+│  │                 │  │                 │  │                 │         │
+│  │ • Raw accel     │  │ • Bias corrected│  │ • Attitude      │         │
+│  │   measurements  │  │ • Scale factor  │  │ • Angular vel.  │         │
+│  │ • Raw gyro      │  │   compensated   │  │ • Linear acc.   │         │
+│  │   measurements  │  │ • Temperature   │  │ • Velocity      │         │
+│  │ • Raw mag       │  │   corrected     │  │ • Position      │         │
+│  │   measurements  │  │ • Alignment     │  │ • Heading       │         │
+│  │ • Timestamps    │  │   compensated   │  │ • Bias est.     │         │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘         │
+│         │                       │                       │               │
+│         ▼                       ▼                       ▼               │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │                    PROCESSING PIPELINE                              ││
+│  │  Raw Data → Calibration → Filtering → Integration → Estimation    ││
+│  │  → Sensor Fusion → State Estimation → Control/Navigation           ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────┐│
+│  │  DOWNSTREAM APPLICATIONS                                             ││
+│  │  • AHRS: Attitude and heading reference system using IMU data      ││
+│  │  • INS: Inertial navigation system with dead reckoning             ││
+│  │  • Sensor Fusion: Combining IMU with other sensors (GPS, vision)   ││
+│  │  • Control: Feedback for robot stabilization and control systems   ││
+│  │  • SLAM: Initialization and prediction in visual-inertial SLAM      ││
+│  │  • Motion Analysis: Human activity recognition and gesture detection││
+│  │  • Calibration: Self-calibration and bias estimation algorithms    ││
+│  └─────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────┘

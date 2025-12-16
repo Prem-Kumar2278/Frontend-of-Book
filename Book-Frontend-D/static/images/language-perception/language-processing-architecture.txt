@@ -1,0 +1,42 @@
+# Language Processing Architecture for Robotics
+
+## Overview
+This diagram illustrates the architecture of language processing systems in robotics, showing how voice input is transformed into actionable intent.
+
+## Components
+
+### Input Layer
+- Microphone array for audio capture
+- Audio preprocessing for noise reduction
+- Wake word detection system
+
+### Processing Layer
+- Automatic Speech Recognition (ASR)
+- Natural Language Understanding (NLU)
+- Intent extraction module
+- Context management system
+
+### Integration Layer
+- World model interface
+- Perception system coordination
+- Action space mapping
+- Plan validation
+
+## Data Flow
+1. Audio input → Preprocessing → Wake word detection
+2. Wake word activation → ASR → Text output
+3. Text input → NLU → Intent extraction
+4. Intent + Context → Action mapping → Executable commands
+
+## Key Features
+- Real-time processing capabilities
+- Noise tolerance and acoustic adaptation
+- Context-aware intent resolution
+- Multi-modal integration potential
+- Safety and validation checks
+
+## Integration Points
+- Connection to perception systems for object reference resolution
+- Link to planning systems for action decomposition
+- Feedback loops for disambiguation
+- Safety systems for command validation
